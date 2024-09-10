@@ -45,9 +45,9 @@ const FirstBody = () => {
                 className="h-full w-full"
               />
             </div>
-            <div className="h-[149px] w-[90%] lg:w-[514px] bg-white mt-[-5rem] shadow-md flex flex-col items-start pl-10">
-              <div className="text-[#FFAE00] mt-4">News</div>
-              <div className="text-[#305176] lg:w-[450px] w-[90%] font-bold mt-2 text-xl">
+            <div className="h-[149px] w-[90%] lg:w-[514px] bg-white mt-[-5rem] shadow-md flex flex-col items-start pl-5">
+              <div className="text-[#FFAE00] lg:mt-4 mt-2">News</div>
+              <div className="text-[#305176] lg:w-[450px] w-[90%] font-bold lg:mt-2 mt-0 text-xl">
                 Morocco&apos;s Al-Haouz Earthquake: 1 year on
               </div>
               <button className="mt-2 text-gray-500 font-bold text-lg hover:opacity-90 hover:underline">
@@ -66,9 +66,9 @@ const FirstBody = () => {
                 className="h-full w-full"
               />
             </div>
-            <div className="h-[149px] w-[90%] lg:w-[514px] bg-white mt-[-5rem] shadow-md flex flex-col items-start pl-10">
+            <div className="h-[149px] w-[90%] lg:w-[514px] bg-white mt-[-5rem] shadow-md flex flex-col items-start pl-5">
               <div className="text-[#FFAE00] lg:mt-4 mt-2">News</div>
-              <div className="text-[#305176] lg:w-[450px] w-[90%] font-bold mt-0 lg:mt-2 text-xl">
+              <div className="text-[#305176] lg:w-[450px] w-[350px] font-bold mt-0 lg:mt-2 text-xl">
                 Millions affected as floods continue to sweep across Bangladesh
               </div>
               <button className="lg:mt-2 mt-0 text-gray-500 font-bold text-lg hover:opacity-90 hover:underline">
