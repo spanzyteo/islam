@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <>
       {scrolled ? (
-        <nav className="fixed lg:flex hidden justify-between top-0 left-0 h-[70px] w-full bg-white shadow-md transition-all duration-300">
+        <nav className="fixed lg:flex hidden justify-between top-0 left-0 h-[70px] w-full bg-white shadow-md transition-all duration-300 z-50">
           <div className="h-[70px] w-[150px] ml-8">
             <Image
               src={logo2}
@@ -72,7 +72,7 @@ const Navbar = () => {
           </div>
         </nav>
       ) : (
-        <nav className="fixed top-0 left-0 w-full h-[150px] transition-all duration-300">
+        <nav className="fixed top-0 left-0 w-full h-[150px] transition-all duration-300 z-50">
           <div className="absolute inset-0 bg-black bg-opacity-20 blur-lg pointer-events-none"></div>
           <div className="flex flex-row justify-between">
             <div className="z-50">
