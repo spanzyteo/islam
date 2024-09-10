@@ -48,7 +48,7 @@ const FirstBody = () => {
             <div className="h-[149px] w-[90%] lg:w-[514px] bg-white mt-[-5rem] shadow-md flex flex-col items-start pl-10">
               <div className="text-[#FFAE00] mt-4">News</div>
               <div className="text-[#305176] lg:w-[450px] w-[90%] font-bold mt-2 text-xl">
-                Morocco's Al-Haouz Earthquake: 1 year on
+                Morocco&apos;s Al-Haouz Earthquake: 1 year on
               </div>
               <button className="mt-2 text-gray-500 font-bold text-lg hover:opacity-90 hover:underline">
                 Read more
