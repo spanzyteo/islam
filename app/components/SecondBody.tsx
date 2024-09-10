@@ -42,7 +42,7 @@ const SecondBody = () => {
               <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                 emergency projects
               </h1>
-              <h1 className="text-white md:text-xl text-lg mt-4 lg:w-[100%] w-[250px]">
+              <h1 className="text-white md:text-xl text-md mt-4 lg:w-[100%] w-[220px]">
                 reached 8.7 million people in 29 countries
               </h1>
             </div>
@@ -56,7 +56,7 @@ const SecondBody = () => {
               <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                 major appeals
               </h1>
-              <h1 className="text-white md:text-xl text-lg mt-4 lg:w-[450px] w-[250px]">
+              <h1 className="text-white md:text-xl text-md mt-4 lg:w-[450px] w-[220px]">
                 launched, and 3 maintained, to fund emergency responses
               </h1>
             </div>
@@ -72,7 +72,7 @@ const SecondBody = () => {
               <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                 million individuals
               </h1>
-              <h1 className="text-white md:text-xl text-lg mt-4 lg:w-[100%] w-[250px]">
+              <h1 className="text-white md:text-xl text-md mt-4 lg:w-[100%] w-[220px]">
                 received life-saving food aid, including over 2 million monthly
                 in Yemen
               </h1>
@@ -87,7 +87,7 @@ const SecondBody = () => {
               <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                 132.6 million
               </h1>
-              <h1 className="text-white md:text-xl text-lg mt-4 lg:w-[450px] w-[250px]">
+              <h1 className="text-white md:text-xl text-md mt-4 lg:w-[450px] w-[220px]">
                 spent supporting people affected by and recovering from
                 disasters
               </h1>
