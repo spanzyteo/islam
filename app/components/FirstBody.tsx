@@ -1,10 +1,11 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 
 const FirstBody = () => {
   return (
     <>
-      <div className="mt-16 md:w-[80%] w-[90%] mx-auto mb-40">
+      <div className="mt-16 md:w-[80%] w-[90%] mx-auto">
         <div className="flex items-center gap-4">
           <div className="md:h-[100px] h-[50px] w-[20px] bg-[rgb(48,81,118)]"></div>
           <div className="text-[#305176] lg:text-4xl text-3xl font-bold">
