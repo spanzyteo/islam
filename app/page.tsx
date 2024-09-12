@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import FirstBody from "./components/FirstBody";
 import SecondBody from "./components/SecondBody";
+import ThirdBody from "./components/ThirdBody";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Banner />
       <FirstBody />
       <SecondBody />
+      <ThirdBody />
     </>
   )
 }
