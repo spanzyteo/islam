@@ -20,7 +20,7 @@ const SecondBody = () => {
         : 'text-white font-bold md:text-2xl text-md mt-8 cursor-pointer'
     }`
   }
-  
+
   return (
     <div className="mt-20">
       <div className="mx-auto flex">
@@ -60,7 +60,10 @@ const SecondBody = () => {
           </div>
         </div>
         {currentSet.map((item) => (
-          <div className="w-[64%] flex lg:flex-row flex-col lg:ml-10 ml-2 mt-20">
+          <div
+            key={item.id}
+            className="w-[64%] flex lg:flex-row flex-col lg:ml-10 ml-2 mt-20"
+          >
             <div className=" flex flex-col">
               <div>
                 <h1
