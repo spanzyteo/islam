@@ -75,7 +75,7 @@ const SecondBody = () => {
                 <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                   {item.text1b}
                 </h1>
-                <h1 className="text-white md:text-xl text-md mt-4 lg:w-[100%] w-[220px]">
+                <h1 className="text-white md:text-lg text-md mt-4 lg:w-[100%] w-[220px]">
                   {item.text1c}
                 </h1>
               </div>
@@ -89,7 +89,7 @@ const SecondBody = () => {
                 <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                   {item.text2b}
                 </h1>
-                <h1 className="text-white md:text-xl text-md mt-4 lg:w-[450px] w-[220px]">
+                <h1 className="text-white md:text-lg text-md mt-4 lg:w-[450px] w-[220px]">
                   {item.text2c}
                 </h1>
               </div>
@@ -105,7 +105,7 @@ const SecondBody = () => {
                 <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                   {item.text3b}
                 </h1>
-                <h1 className="text-white md:text-xl text-md mt-4 lg:w-[100%] w-[220px]">
+                <h1 className="text-white md:text-lg text-md mt-4 lg:w-[100%] w-[220px]">
                   {item.text3c}
                 </h1>
               </div>
@@ -119,7 +119,7 @@ const SecondBody = () => {
                 <h1 className="text-[#F29F05] text-2xl font-semibold mt-2">
                   {item.text4b}
                 </h1>
-                <h1 className="text-white md:text-xl text-md mt-4 lg:w-[450px] w-[220px]">
+                <h1 className="text-white md:text-lg text-md mt-4 lg:w-[100%] w-[220px]">
                   {item.text4c}
                 </h1>
               </div>

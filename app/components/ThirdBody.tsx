@@ -33,6 +33,9 @@ const ThirdBody = () => {
               backgroundColor: 'rgba(48, 81, 118, 0.6)',
             }}
           ></div>
+          <h1 className="font-bold text-2xl text-white z-50 absolute bottom-5 left-[5rem]">
+            Women and girls
+          </h1>
         </div>
         <div
           className="md:block hidden h-[438px] lg:w-[366px] md:w-[346px] w-[100%] relative bg-cover bg-center border cursor-pointer overflow-hidden group"
@@ -56,6 +59,9 @@ const ThirdBody = () => {
               backgroundColor: 'rgba(48, 81, 118, 0.6)',
             }}
           ></div>
+          <h1 className="font-bold text-2xl text-white z-50 absolute bottom-5 left-[6rem]">
+            Climate change
+          </h1>
         </div>
         <div
           className="lg:block hidden h-[438px] lg:w-[366px] md:w-[346px] w-[100%] relative bg-cover bg-center border cursor-pointer overflow-hidden group"
@@ -79,6 +85,9 @@ const ThirdBody = () => {
               backgroundColor: 'rgba(48, 81, 118, 0.6)',
             }}
           ></div>
+          <h1 className="font-bold text-2xl text-white z-50 absolute bottom-5 left-[0.25rem] text-center">
+            Refugees and displaced people
+          </h1>
         </div>
       </div>
     </div>
