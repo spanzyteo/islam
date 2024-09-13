@@ -76,7 +76,7 @@ const Navbar = () => {
           <div className="absolute inset-0 bg-black bg-opacity-20 blur-lg pointer-events-none"></div>
           <div className="flex flex-row justify-between">
             <div className="z-50">
-              <div className="md:h-[150px] h-[120px] md:w-[270px] w-[220px] ml-4 md:ml-8">
+              <div className="md:h-[150px] h-[100px] md:w-[270px] w-[200px] ml-4 md:ml-8">
                 <Image
                   src={logo}
                   alt="logo"
