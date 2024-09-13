@@ -6,6 +6,7 @@ import SecondBody from "./components/SecondBody";
 import ThirdBody from "./components/ThirdBody";
 import FourthBody from "./components/FourthBody";
 import SecondaryFooter from "./components/SecondaryFooter";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ThirdBody />
       <FourthBody />
       <SecondaryFooter />
+      <Footer />
     </>
   )
 }
