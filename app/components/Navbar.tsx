@@ -105,7 +105,7 @@ const Navbar = () => {
                 <div className="bg-[#0074C8] text-white p-2 px-5 font-semibold lg:block hidden">
                   40 Years of Service
                 </div>
-                <div className="bg-[#0074C8] text-white p-3 mt-[-0.5rem] font-semibold ml-[0.05rem] md:mr-2 mr-4">
+                <div className="bg-[#0074C8] text-white p-3 mt-[-0.5rem] font-semibold ml-[0.05rem] md:mr-2 mr-0">
                   <IoSearchSharp className="h-[20px] w-[20px]" />
                 </div>
               </div>
@@ -145,7 +145,7 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="block lg:hidden mt-8 relative">
-                <IoMdMenu className="text-black h-[30px] w-[30px] absolute right-0 mr-4" />
+                <IoMdMenu className="text-black h-[30px] w-[30px] absolute right-0 mr-0" />
               </div>
             </div>
           </div>

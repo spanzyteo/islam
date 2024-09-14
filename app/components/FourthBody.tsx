@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const FourthBody = () => {
   return (
-    <div className="mt-20 bg-[#F2F2F2]">
+    <div className="mt-20 bg-[#F2F2F2] pb-16">
       <div className="md:w-[90%] w-[90%] mx-auto">
         <div className="mt-16 flex items-center gap-4">
           <div className="mt-16 md:h-[100px] h-[80px] w-[20px] bg-[rgb(48,81,118)]"></div>
