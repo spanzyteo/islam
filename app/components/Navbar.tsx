@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoSearchSharp } from 'react-icons/io5'
 import { IoMdMenu } from 'react-icons/io'
+import Link from 'next/link'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -66,9 +67,11 @@ const Navbar = () => {
               <h1 className="">Media, news and opinion</h1>
               <IoIosArrowDown className="h-[15px] w-[15px] text-black font-bold" />
             </div>
-            <div className="bg-[#DC3545] text-white p-2 px-3 mr-3 cursor-pointer font-semibold hover:opacity-70">
-              DONATE
-            </div>
+            <Link href={'/donate'}>
+              <div className="bg-[#DC3545] text-white p-2 px-3 mr-3 cursor-pointer font-semibold hover:opacity-70">
+                DONATE
+              </div>
+            </Link>
           </div>
         </nav>
       ) : (
@@ -99,9 +102,11 @@ const Navbar = () => {
                 <div className="bg-[#FFAE00] text-[#23438f] p-2 px-5 font-semibold lg:block hidden">
                   Annual Report Site
                 </div>
+                <Link href={'/donate'}>
                 <div className="bg-[#DC3545] text-white p-2 px-5 font-semibold md:text-[1rem] text-[0.8rem]">
                   DONATE
                 </div>
+                </Link>
                 <div className="bg-[#0074C8] text-white p-2 px-5 font-semibold lg:block hidden">
                   40 Years of Service
                 </div>
