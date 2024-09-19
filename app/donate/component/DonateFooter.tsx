@@ -13,7 +13,7 @@ const DonateFooter = () => {
           objectFit="cover"
         />
       </div>
-      <div className="mt-8 text-[#999999] flex flex-col gap-4 items-center mb-16 w-[90%] text-center">
+      <div className="mt-8 text-[#999999] flex flex-col gap-4 items-center mb-8 w-[90%] text-center">
         <h1>
           Privacy Policy | Other ways to donate (phone,post & bank transfer)
         </h1>

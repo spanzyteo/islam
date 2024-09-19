@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 const DonateDiv = () => {
   return (
@@ -21,11 +22,13 @@ const DonateDiv = () => {
             className="h-full w-full"
           />
         </div>
-        <div className="flex flex-col sm:flex-row text-[#555] text-4xl sm:gap-0 gap-4 font-bold w-[90%] md:w-[50%] justify-center">
-          <button className="border-2 border-[#01aef0] p-2 uppercase">
-            Monthly
-          </button>
-          <button className="border-2 border-[#01aef0] p-2 uppercase">
+        <div className="flex flex-col sm:flex-row text-4xl sm:gap-0 gap-4 font-bold w-[90%] md:w-[50%] justify-center items-center">
+          <Link href={'/donate/monthly'}>
+            <button className="border-2 border-[#01aef0] bg-[#01aef0] p-2 uppercase text-white">
+              Monthly
+            </button>
+          </Link>
+          <button className="border-2 border-[#01aef0] p-2 uppercase text-[#555] hover:bg-gray-300 transition-all duration-300 ease-in-out">
             One-Off
           </button>
         </div>
