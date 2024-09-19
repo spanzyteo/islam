@@ -28,7 +28,7 @@ const DonateDiv = () => {
               Monthly
             </button>
           </Link>
-          <button className="border-2 border-[#01aef0] p-2 uppercase text-[#555] hover:bg-gray-300 transition-all duration-300 ease-in-out">
+          <button className="border-2 border-[#01aef0] p-2 px-[1.1rem] lg:px-0 uppercase text-[#555] hover:bg-gray-300 transition-all duration-300 ease-in-out">
             One-Off
           </button>
         </div>
