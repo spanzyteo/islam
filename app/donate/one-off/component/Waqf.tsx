@@ -1,21 +1,20 @@
-'use client'
+import { waqf } from '@/app/data/OneOffData'
 import { useState } from 'react'
-import { sadaqah } from '@/app/data/donateData'
 
-const Sadaqah = () => {
+const Waqf = () => {
     const [selectedSection, setSelectedSection] = useState('USD')
     const [donateAmount, setDonateAmount] = useState<number | null>(100)
     const [isOther, setIsOther] = useState(false)
     const [otherAmount, setOtherAmount] = useState<number | null>(null)
 
-     const filteredSadaqah = sadaqah.filter(
-       (item) => item.section === selectedSection
-     )
+    const filteredWaqf = waqf.filter(
+      (item) => item.section === selectedSection
+    )
 
-     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-       const value = e.target.value
-       setOtherAmount(value === '' ? null : Number(value))
-     }
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      setOtherAmount(value === '' ? null : Number(value))
+    }
 
   return (
     <>
@@ -49,7 +48,7 @@ const Sadaqah = () => {
         </button>
       </div>
       <div className="mt-4 flex flex-col items-center justify-center gap-8">
-        {filteredSadaqah.map((item) => (
+        {filteredWaqf.map((item) => (
           <>
             <div
               key={item.id}
@@ -130,4 +129,4 @@ const Sadaqah = () => {
   )
 }
 
-export default Sadaqah
+export default Waqf

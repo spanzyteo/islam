@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { sadaqah } from '@/app/data/donateData'
+import { sadaqah } from '@/app/data/OneOffData'
 
 const Sadaqah = () => {
     const [selectedSection, setSelectedSection] = useState('USD')
@@ -8,15 +8,14 @@ const Sadaqah = () => {
     const [isOther, setIsOther] = useState(false)
     const [otherAmount, setOtherAmount] = useState<number | null>(null)
 
-     const filteredSadaqah = sadaqah.filter(
-       (item) => item.section === selectedSection
-     )
+    const filteredSadaqah = sadaqah.filter(
+      (item) => item.section === selectedSection
+    )
 
-     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-       const value = e.target.value
-       setOtherAmount(value === '' ? null : Number(value))
-     }
-
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      setOtherAmount(value === '' ? null : Number(value))
+    }
   return (
     <>
       <h1 className="text-[#01aef0] uppercase text-2xl font-bold mt-8">
