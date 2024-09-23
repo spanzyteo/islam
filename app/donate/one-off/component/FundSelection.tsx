@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import EmergencyAppeal from './EmergencyAppeal'
 import Zakat from './Zakat'
 import Sadaqah from './Sadaqah'
@@ -39,82 +39,25 @@ const FundSelection = () => {
   const [humanitarians, setHumanitarians] = useState(false)
   const [globalEmergencies, setGlobalEmergencies] = useState(false)
 
-  const handleEmergencyAppeal = () => {
-    setEmergencyAppeal(true)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
+  const [selectedFund, setSelectedFund] = useState<string | null>(null)
+  
+  const componentRef = useRef<HTMLDivElement>(null)
+
+  const handleFundSelection = (fund: string) => {
+    setSelectedFund(fund)
+
+    setTimeout(() => {
+      if (componentRef.current) {
+        const topOffset =
+          componentRef.current.getBoundingClientRect().top + window.scrollY
+        window.scrollTo({
+          top: topOffset,
+          behavior: 'smooth',
+        })
+      }
+    }, 100) 
   }
-  const handleZakat = () => {
-    setEmergencyAppeal(false)
-    setZakat(true)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleSadaqah = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(true)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleNeededMost = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(true)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
+
   const handleFidya = () => {
     setEmergencyAppeal(false)
     setZakat(false)
@@ -371,9 +314,9 @@ const FundSelection = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <button
-            onClick={handleEmergencyAppeal}
+            onClick={() => handleFundSelection('emergencyAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              emergencyAppeal
+              selectedFund === 'emergencyAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -381,49 +324,59 @@ const FundSelection = () => {
             Palestine Emergency Appeal
           </button>
           <button
-            onClick={handleZakat}
+            onClick={() => handleFundSelection('zakat')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              zakat ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'zakat'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Zakat
           </button>
           <button
-            onClick={handleSadaqah}
+            onClick={() => handleFundSelection('sadaqah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              sadaqah ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'sadaqah'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Sadaqah
           </button>
           <button
-            onClick={handleNeededMost}
+            onClick={() => handleFundSelection('neededMost')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              neededMost ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'neededMost'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Wherever Needed Most
           </button>
           <button
-            onClick={handleFidya}
+            onClick={() => handleFundSelection('fidyah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              fidyah ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'fidyah'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Fidyah
           </button>
           <button
-            onClick={handleKaffarah}
+            onClick={() => handleFundSelection('kafarrah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              kaffarah ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'kafarrah'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Kafarrah
           </button>
           <button
-            onClick={handleSudanAppeal}
+            onClick={() => handleFundSelection('sudanAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              sudanAppeal
+              selectedFund === 'sudanAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -431,9 +384,9 @@ const FundSelection = () => {
             Sudan Emergency Appeal
           </button>
           <button
-            onClick={handleSyriaAppeal}
+            onClick={() => handleFundSelection('syriaAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              syriaAppeal
+              selectedFund === 'syriaAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -441,9 +394,9 @@ const FundSelection = () => {
             Syria Crises Appeal
           </button>
           <button
-            onClick={handleYemenAppeal}
+            onClick={() => handleFundSelection('yemenAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              yemenAppeal
+              selectedFund === 'yemenAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -451,9 +404,9 @@ const FundSelection = () => {
             Yemen Appeal
           </button>
           <button
-            onClick={handleWaterForLife}
+            onClick={() => handleFundSelection('waterForLife')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              waterForLife
+              selectedFund === 'waterForLife'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -461,9 +414,9 @@ const FundSelection = () => {
             Water For Life
           </button>
           <button
-            onClick={handleOrphansAndChildren}
+            onClick={() => handleFundSelection('orphansAndChildren')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              orphansAndChildren
+              selectedFund === 'orphansAndChildren'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -471,9 +424,9 @@ const FundSelection = () => {
             Orphans And Children
           </button>
           <button
-            onClick={handleSadaqahJaria}
+            onClick={() => handleFundSelection('sadaqahJariya')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              sadaqahJariya
+              selectedFund === 'sadaqahJariya'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -481,9 +434,9 @@ const FundSelection = () => {
             Sadaqah Jariyah
           </button>
           <button
-            onClick={handlePeopleInDebt}
+            onClick={() => handleFundSelection('peopleInDebt')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              peopleInDebt
+              selectedFund === 'peopleInDebt'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -491,25 +444,29 @@ const FundSelection = () => {
             People In Debt
           </button>
           <button
-            onClick={handleWaqf}
+            onClick={() => handleFundSelection('waqf')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              waqf ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'waqf'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Waqf
           </button>
           <button
-            onClick={handleInterest}
+            onClick={() => handleFundSelection('interest')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              interest ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
+              selectedFund === 'interest'
+                ? 'bg-[#01aef0] text-white'
+                : 'bg-white text-[#555555]'
             }`}
           >
             Interest[RIBA]
           </button>
           <button
-            onClick={handleHumanitarians}
+            onClick={() => handleFundSelection('humanitarians')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              humanitarians
+              selectedFund === 'humanitarians'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -517,9 +474,9 @@ const FundSelection = () => {
             Capacity Building For Humanitarians
           </button>
           <button
-            onClick={handleGlobalEmergencies}
-            className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white block md:hidden ${
-              globalEmergencies
+            onClick={() => handleFundSelection('globalEmergencies')}
+            className={`md:hidden block py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
+              selectedFund === 'globalEmergencies'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -528,32 +485,34 @@ const FundSelection = () => {
           </button>
         </div>
         <button
-          onClick={handleGlobalEmergencies}
+          onClick={() => handleFundSelection('globalEmergencies')}
           className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white mt-4 w-[50%] mx-auto md:block hidden ${
-            globalEmergencies
+            selectedFund === 'globalEmergencies'
               ? 'bg-[#01aef0] text-white'
               : 'bg-white text-[#555555]'
           }`}
         >
           Global Emergencies
         </button>
-        {emergencyAppeal && <EmergencyAppeal />}
-        {zakat && <Zakat />}
-        {sadaqah && <Sadaqah />}
-        {neededMost && <NeededMost />}
-        {fidyah && <Fidyah />}
-        {kaffarah && <Kaffarah />}
-        {sudanAppeal && <SudanAppeal />}
-        {syriaAppeal && <SyriaAppeal />}
-        {yemenAppeal && <YemenAppeal />}
-        {waterForLife && <WaterForLife />}
-        {orphansAndChildren && <OrphansAndChildren />}
-        {sadaqahJariya && <SadaqahJariya />}
-        {peopleInDebt && <PeopleInDebt />}
-        {waqf && <Waqf />}
-        {interest && <Interest />}
-        {humanitarians && <Humanitarians />}
-        {globalEmergencies && <GlobalEmergencies />}
+        <div ref={componentRef}>
+          {selectedFund === 'emergencyAppeal' && <EmergencyAppeal />}
+          {selectedFund === 'zakat' && <Zakat />}
+          {selectedFund === 'sadaqah' && <Sadaqah />}
+          {selectedFund === 'neededMost' && <NeededMost />}
+          {selectedFund === 'fidyah' && <Fidyah />}
+          {selectedFund === 'kafarrah' && <Kaffarah />}
+          {selectedFund === 'sudanAppeal' && <SudanAppeal />}
+          {selectedFund === 'syriaAppeal' && <SyriaAppeal />}
+          {selectedFund === 'yemenAppeal' && <YemenAppeal />}
+          {selectedFund === 'waterForLife' && <WaterForLife />}
+          {selectedFund === 'orphansAndChildren' && <OrphansAndChildren />}
+          {selectedFund === 'sadaqahJariya' && <SadaqahJariya />}
+          {selectedFund === 'peopleInDebt' && <PeopleInDebt />}
+          {selectedFund === 'waqf' && <Waqf />}
+          {selectedFund === 'interest' && <Interest />}
+          {selectedFund === 'humanitarians' && <Humanitarians />}
+          {selectedFund === 'globalEmergencies' && <GlobalEmergencies />}
+        </div>
         <div className="flex items-center justify-between mt-8">
           <Link href={'/donate'}>
             <button className="text-2xl font-bold bg-white flex items-center p-2 px-4 gap-2 text-[#A7A7A7] hover:bg-gray-300 hover:text-[#555555] transition-all duration-300 ease-in-out">
