@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { newsText, NewsTextStructure } from '../../data/newsText'
+import { newsText, NewsTextStructure } from '../data/newsText'
 
 const SecondBody = () => {
   const [activeSection, setActiveSection] = useState<string>('Saving lives')

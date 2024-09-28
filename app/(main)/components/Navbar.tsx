@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import logo from '../../public/logo.png'
-import logo2 from '../../public/logo2.png'
+// import logo2 from '../../public/logo2.png'
 import Image from 'next/image'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoSearchSharp } from 'react-icons/io5'
@@ -37,7 +37,7 @@ const Navbar = () => {
         <nav className="fixed lg:flex hidden justify-between top-0 left-0 h-[70px] w-full bg-white shadow-md transition-all duration-300 z-50">
           <div className="h-[70px] w-[150px] ml-8">
             <Image
-              src={logo2}
+              src={"/logo2.png"}
               alt="logo"
               objectFit="cover"
               width={270}
@@ -81,7 +81,7 @@ const Navbar = () => {
             <div className="z-50">
               <div className="md:h-[150px] h-[100px] md:w-[270px] w-[200px] ml-4 md:ml-8">
                 <Image
-                  src={logo}
+                  src={"/public/logo.png"}
                   alt="logo"
                   objectFit="cover"
                   width={270}

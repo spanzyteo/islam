@@ -1,5 +1,5 @@
 import React from 'react'
-import { logo } from '../../data/logos'
+import { logo } from '../data/logos'
 import Image from 'next/image'
 
 const FourthBody = () => {

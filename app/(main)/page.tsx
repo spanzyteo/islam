@@ -1,13 +1,13 @@
 import Image from 'next/image'
-import Navbar from './(main)/components/Navbar'
-import Banner from './(main)/components/Banner'
-import FirstBody from './(main)/components/FirstBody'
-import SecondBody from './(main)/components/SecondBody'
-import ThirdBody from './(main)/components/ThirdBody'
-import FourthBody from './(main)/components/FourthBody'
-import SecondaryFooter from './(main)/components/SecondaryFooter'
-import Footer from './(main)/components/Footer'
-import DonateFooter from './(main)/components/DonateFooter'
+import Navbar from './components/Navbar'
+import Banner from './components/Banner'
+import FirstBody from './components/FirstBody'
+import SecondBody from './components/SecondBody'
+import ThirdBody from './components/ThirdBody'
+import FourthBody from './components/FourthBody'
+import SecondaryFooter from './components/SecondaryFooter'
+import Footer from './components/Footer'
+import DonateFooter from './components/DonateFooter'
 
 export default function Home() {
   return (
