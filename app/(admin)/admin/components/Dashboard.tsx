@@ -6,7 +6,7 @@ import { FaShoppingBag } from 'react-icons/fa'
 const Dashboard = () => {
   return (
     <div className="md:ml-[400px] ml-[3rem] flex flex-col">
-      <div className="md:mt-[200px] mt-24 grid md:grid-cols-2 grid-cols-1 gap-8 mr-[3rem]">
+      <div className="md:mt-[200px] mt-8 grid md:grid-cols-2 grid-cols-1 gap-8 mr-[3rem]">
         <div className="h-[150px] shadow-md bg-white flex items-center">
           <div className="h-[80px] w-[80px] ml-8">
             <FcSalesPerformance className="h-full w-full" />
