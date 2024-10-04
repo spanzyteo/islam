@@ -93,16 +93,18 @@ const Sidebar = () => {
             View payment method
           </h1>
         </Link>
-        <h1
-          onClick={() => handleLinkClick('view_payment_proof')}
-          className={`text-xl font-semibold cursor-pointer ${
-            activeLink === 'view_payment_proof'
-              ? 'text-[#01aef0]'
-              : 'text-gray-500'
-          }`}
-        >
-          View payment proof
-        </h1>
+        <Link href={'/admin/view-payment-proof'} passHref>
+          <h1
+            onClick={() => handleLinkClick('view_payment_proof')}
+            className={`text-xl font-semibold cursor-pointer ${
+              activeLink === 'view_payment_proof'
+                ? 'text-[#01aef0]'
+                : 'text-gray-500'
+            }`}
+          >
+            View payment proof
+          </h1>
+        </Link>
       </div>
     </div>
   )

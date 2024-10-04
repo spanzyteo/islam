@@ -2,54 +2,73 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className="bg-[#F2F2F2]">
-      <div className="md:ml-[400px] ml-[3rem] flex flex-col ">
-        <div className="md:mt-[20px] mt-8 mr-[3rem] mb-10">
+    <div className="bg-[#F2F2F2] min-h-screen p-4">
+      <div className="md:ml-[320px] ml-[1rem] flex flex-col">
+        <div className="md:mt-[20px] mt-8 mr-[1rem] mb-10">
           <h1 className="text-2xl font-semibold text-gray-600">Customers</h1>
-          <div className="flex flex-col mt-6 bg-white shadow-md">
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Title</h1>
-              <h1>Mr</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>First Name</h1>
-              <h1>Joshua</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Last Name</h1>
-              <h1>Titus</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Email</h1>
-              <h1>tech@gmail.com</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Contact Number</h1>
-              <h1>08285372216</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Address 1</h1>
-              <h1>opp front of trailer jorge</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Address 1</h1>
-              <h1>opp front of trailer jorge mansion</h1>
-            </div>
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Town city</h1>
-              <h1>Lagos</h1>
-            </div>{' '}
-            <div className="mt-2 bg-gray-400 h-[0.05rem]"></div>
-            <div className="flex flex-col gap-2 ml-4 mt-2">
-              <h1>Country</h1>
-              <h1>Nigeria</h1>
+          <div className="mt-6 bg-white shadow-md p-4 overflow-x-auto">
+            {/* Table structure with responsive styling */}
+            <div className="table w-full border-collapse border border-gray-300">
+              {/* Table Header */}
+              <div className="table-row bg-gray-100 font-semibold text-sm md:text-base">
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Title
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  First Name
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Last Name
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Email
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Contact Number
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Address 1
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Address 2
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Town City
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Country
+                </div>
+              </div>
+              {/* Table Rows */}
+              <div className="table-row text-sm md:text-base">
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Mr
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Joshua
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Titus
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  tech@gmail.com
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  08285372216
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  opp front of trailer jorge
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  opp front of trailer jorge mansion
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Lagos
+                </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Nigeria
+                </div>
+              </div>
             </div>
           </div>
         </div>
