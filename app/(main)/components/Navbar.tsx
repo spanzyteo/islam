@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import logo from '../../public/logo.png'
-// import logo2 from '../../public/logo2.png'
+import logo2 from '../../public/logo2.png'
 import Image from 'next/image'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoSearchSharp } from 'react-icons/io5'
