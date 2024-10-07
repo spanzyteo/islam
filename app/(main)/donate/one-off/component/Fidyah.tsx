@@ -3,7 +3,7 @@ import { fidya } from '@/app/(main)/data/OneOffData'
 
 const Fidyah = () => {
   const [selectedSection, setSelectedSection] = useState('USD')
-  const [donateAmount, setDonateAmount] = useState<number | null>(100)
+  const [donateAmount, setDonateAmount] = useState<number | null>(10)
   const [isOther, setIsOther] = useState(false)
   const [otherAmount, setOtherAmount] = useState<number | null>(null)
 
@@ -54,11 +54,11 @@ const Fidyah = () => {
             >
               <button
                 onClick={() => {
-                  setDonateAmount(150)
+                  setDonateAmount(15)
                   setIsOther(false)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 150
+                  donateAmount === 15
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -67,11 +67,11 @@ const Fidyah = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(100)
+                  setDonateAmount(10)
                   setIsOther(false)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 100
+                  donateAmount === 10
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -80,11 +80,11 @@ const Fidyah = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(50)
+                  setDonateAmount(5)
                   setIsOther(false)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 50
+                  donateAmount === 5
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}

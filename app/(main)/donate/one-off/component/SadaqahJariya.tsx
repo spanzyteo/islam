@@ -3,7 +3,7 @@ import { sadaqahJariyah } from '@/app/(main)/data/OneOffData'
 
 const SadaqahJariya = () => {
   const [selectedSection, setSelectedSection] = useState('USD')
-  const [donateAmount, setDonateAmount] = useState<number | null>(100)
+  const [donateAmount, setDonateAmount] = useState<number | null>(150)
   const [isOther, setIsOther] = useState(false)
   const [otherAmount, setOtherAmount] = useState<number | null>(null)
 
@@ -56,6 +56,19 @@ const SadaqahJariya = () => {
             >
               <button
                 onClick={() => {
+                  setDonateAmount(200)
+                  setIsOther(false)
+                }}
+                className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
+                  donateAmount === 200
+                    ? 'bg-[#01aef0] text-white'
+                    : 'bg-white text-[#555555]'
+                }`}
+              >
+                {item.amount1}
+              </button>
+              <button
+                onClick={() => {
                   setDonateAmount(150)
                   setIsOther(false)
                 }}
@@ -65,7 +78,7 @@ const SadaqahJariya = () => {
                     : 'bg-white text-[#555555]'
                 }`}
               >
-                {item.amount1}
+                {item.amount2}
               </button>
               <button
                 onClick={() => {
@@ -74,19 +87,6 @@ const SadaqahJariya = () => {
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
                   donateAmount === 100
-                    ? 'bg-[#01aef0] text-white'
-                    : 'bg-white text-[#555555]'
-                }`}
-              >
-                {item.amount2}
-              </button>
-              <button
-                onClick={() => {
-                  setDonateAmount(50)
-                  setIsOther(false)
-                }}
-                className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 50
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}

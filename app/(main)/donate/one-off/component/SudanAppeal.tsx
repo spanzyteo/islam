@@ -1,14 +1,13 @@
-'use client'
 import { useState } from 'react'
-import { sudanAppeal } from '@/app/(main)/data/OneOffData'
+import { sadaqahJariyah } from '@/app/(main)/data/OneOffData'
 
-const SudanAppeal = () => {
+const SadaqahJariya = () => {
   const [selectedSection, setSelectedSection] = useState('USD')
-  const [donateAmount, setDonateAmount] = useState<number | null>(100)
+  const [donateAmount, setDonateAmount] = useState<number | null>(150)
   const [isOther, setIsOther] = useState(false)
   const [otherAmount, setOtherAmount] = useState<number | null>(null)
 
-  const filteredSudanAppeal = sudanAppeal.filter(
+  const filteredSadaqahJariya = sadaqahJariyah.filter(
     (item) => item.section === selectedSection
   )
 
@@ -49,12 +48,25 @@ const SudanAppeal = () => {
         </button>
       </div>
       <div className="mt-4 flex flex-col items-center justify-center gap-8">
-        {filteredSudanAppeal.map((item) => (
+        {filteredSadaqahJariya.map((item) => (
           <>
             <div
               key={item.id}
               className="flex md:flex-row flex-col items-center justify-center gap-10"
             >
+              <button
+                onClick={() => {
+                  setDonateAmount(200)
+                  setIsOther(false)
+                }}
+                className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
+                  donateAmount === 200
+                    ? 'bg-[#01aef0] text-white'
+                    : 'bg-white text-[#555555]'
+                }`}
+              >
+                {item.amount1}
+              </button>
               <button
                 onClick={() => {
                   setDonateAmount(150)
@@ -66,7 +78,7 @@ const SudanAppeal = () => {
                     : 'bg-white text-[#555555]'
                 }`}
               >
-                {item.amount1}
+                {item.amount2}
               </button>
               <button
                 onClick={() => {
@@ -75,19 +87,6 @@ const SudanAppeal = () => {
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
                   donateAmount === 100
-                    ? 'bg-[#01aef0] text-white'
-                    : 'bg-white text-[#555555]'
-                }`}
-              >
-                {item.amount2}
-              </button>
-              <button
-                onClick={() => {
-                  setDonateAmount(50)
-                  setIsOther(false)
-                }}
-                className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 50
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -130,4 +129,4 @@ const SudanAppeal = () => {
   )
 }
 
-export default SudanAppeal
+export default SadaqahJariya

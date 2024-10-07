@@ -81,7 +81,7 @@ const Navbar = () => {
             <div className="z-50">
               <div className="md:h-[150px] h-[100px] md:w-[270px] w-[200px] ml-4 md:ml-8">
                 <Image
-                  src={"/public/logo.png"}
+                  src={"/logo.png"}
                   alt="logo"
                   objectFit="cover"
                   width={270}
