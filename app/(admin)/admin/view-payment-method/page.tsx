@@ -24,16 +24,6 @@ const page = () => {
 
     fetchBankDetails()
   }, [])
-
-
-  if (loading) {
-    return <div>Loading...</div> // Display a loading message while fetching
-  }
-
-  if (error) {
-    return <div>Error: {error}</div> // Display error message if fetching fails
-  }
-
   return (
     <div className="bg-[#F2F2F2]">
       <div className="md:ml-[400px] ml-[3rem] flex flex-col">
