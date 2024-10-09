@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-const page = () => {
+const AddPayment = () => {
   const [formData, setFormData] = useState({
     bankName: '',
     accountNumber: '',
@@ -367,4 +367,4 @@ const page = () => {
   )
 }
 
-export default page
+export default AddPayment

@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-const page = () => {
+const ViewPayment = () => {
   const [bankDetails, setBankDetails] = useState<any[]>([]) // For displaying fetched data
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -130,4 +130,4 @@ const page = () => {
   )
 }
 
-export default page
+export default ViewPayment
