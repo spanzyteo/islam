@@ -1,22 +1,59 @@
 'use client'
 import { useState } from 'react'
 import { BASE_URL } from '../utils/apiConfig'
+import axios from 'axios'
 
 const AddPayment = () => {
   const [formData, setFormData] = useState({
-    bankName: '',
-    accountNumber: '',
-    swiftCode: '',
+    bankname: '',
+    accountnumber: '',
+    swiftcode: '',
     iban: '',
-    bankAddress: '',
-    receiverAddress: '',
-    receiverPhone: '',
+    bankaddress: '',
+    receiveraddress: '',
+    receiverphone: '',
+  })
+  const [zelleDetails, setZelleDetails] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  })
+  const [venmoDetails, setVenmoDetails] = useState({
+    username: '',
+    lastfourdigits: '',
+  })
+  const [paypalDetails, setPaypalDetails] = useState({
+    email: ''
   })
   const [loading, setLoading] = useState(false)
+  const [zelleLoading, setZelleLoading] = useState(false)
+  const [venmoLoading, setVenmoLoading] = useState(false)
+  const [paypalLoading, setPaypalLoading] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleZelleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setZelleDetails({
+      ...zelleDetails,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleVenmoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVenmoDetails({
+      ...venmoDetails,
+      [e.target.name]: e.target.value,
+    })
+  } 
+  
+  const handlePaypalInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPaypalDetails({
+      ...paypalDetails,
       [e.target.name]: e.target.value,
     })
   }
@@ -26,23 +63,25 @@ const AddPayment = () => {
     setLoading(true)
 
     try {
-      const response = await fetch(`${BASE_URL}/api/storeBankDetails`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+      const response = await axios.post(
+        `${BASE_URL}/api/storeBankDetails`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
 
-      if (response.ok) {
+      if (response.status === 200) {
         setFormData({
-          bankName: '',
-          accountNumber: '',
-          swiftCode: '',
+          bankname: '',
+          accountnumber: '',
+          swiftcode: '',
           iban: '',
-          bankAddress: '',
-          receiverAddress: '',
-          receiverPhone: '',
+          bankaddress: '',
+          receiveraddress: '',
+          receiverphone: '',
         })
         console.log('form added')
       } else {
@@ -53,6 +92,100 @@ const AddPayment = () => {
       console.error('Error:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleZelleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setZelleLoading(true)
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/storeZelleDetails`,
+        zelleDetails,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        setZelleDetails({
+          name: '',
+          email: '',
+          phone: '',
+        })
+      } else {
+        console.error('Error posting zelle data')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setZelleLoading(false)
+    }
+  }
+
+  const handleVenmoSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setVenmoLoading(true)
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/storeVenmoDetails`,
+        venmoDetails,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        setVenmoDetails({
+          username: '',
+          lastfourdigits: '',
+        })
+        console.log('venmo form added')
+        console.log(venmoDetails)
+      } else {
+        console.error('Error posting venmo data')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setVenmoLoading(false)
+    }
+  }
+  
+  const handlePaypalSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setPaypalLoading(true)
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/storePaypalDetails`,
+        paypalDetails,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        setPaypalDetails({
+          email: '',
+        })
+        console.log('paypal form added')
+        console.log(paypalDetails)
+      } else {
+        console.error('Error posting paypal data')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setPaypalLoading(false)
     }
   }
   return (
@@ -76,8 +209,8 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="text"
-                    name="bankName"
-                    value={formData.bankName}
+                    name="bankname"
+                    value={formData.bankname}
                     onChange={handleInputChange}
                     placeholder="Bank Name"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
@@ -94,8 +227,8 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="number"
-                    name="accountNumber"
-                    value={formData.accountNumber}
+                    name="accountnumber"
+                    value={formData.accountnumber}
                     onChange={handleInputChange}
                     placeholder="Account Number"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
@@ -112,8 +245,8 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="number"
-                    name="swiftCode"
-                    value={formData.swiftCode}
+                    name="swiftcode"
+                    value={formData.swiftcode}
                     onChange={handleInputChange}
                     placeholder="Swift code"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
@@ -148,8 +281,8 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="text"
-                    name="bankAddress"
-                    value={formData.bankAddress}
+                    name="bankaddress"
+                    value={formData.bankaddress}
                     onChange={handleInputChange}
                     placeholder="Bank Address"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
@@ -166,8 +299,8 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="text"
-                    name="receiverAddress"
-                    value={formData.receiverAddress}
+                    name="receiveraddress"
+                    value={formData.receiveraddress}
                     onChange={handleInputChange}
                     placeholder="Receivers Address"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
@@ -184,19 +317,23 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="number"
-                    name="receiverPhone"
-                    value={formData.receiverPhone}
+                    name="receiverphone"
+                    value={formData.receiverphone}
                     onChange={handleInputChange}
                     placeholder="Receivers Phone"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
                   />
                 </div>
-                <button type='submit' className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300" disabled={loading}>
-                  {loading? 'Saving...' : 'Add'}
+                <button
+                  type="submit"
+                  className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300"
+                  disabled={loading}
+                >
+                  {loading ? 'Saving...' : 'Add'}
                 </button>
               </form>
-              <form>
+              <form onSubmit={handleZelleSubmit}>
                 <h1 className="text-xl font-semibold text-gray-600 mt-8">
                   Zelle Details
                 </h1>
@@ -210,6 +347,9 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={zelleDetails.name}
+                    onChange={handleZelleInputChange}
                     placeholder="Name"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
@@ -225,6 +365,9 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={zelleDetails.email}
+                    onChange={handleZelleInputChange}
                     placeholder="Email"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
@@ -240,16 +383,22 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="number"
+                    name="phone"
+                    value={zelleDetails.phone}
+                    onChange={handleZelleInputChange}
                     placeholder="Phone Number"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
                   />
                 </div>
-                <button className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
+                <button
+                  type="submit"
+                  className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300"
+                >
                   Add
                 </button>
               </form>
-              <form>
+              <form onSubmit={handleVenmoSubmit}>
                 <h1 className="text-xl font-semibold text-gray-600 mt-8">
                   Venmo Details
                 </h1>
@@ -263,6 +412,9 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="text"
+                    name='username'
+                    value={venmoDetails.username}
+                    onChange={handleVenmoInputChange}
                     placeholder="Username"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
@@ -277,6 +429,9 @@ const AddPayment = () => {
                     <span className="text-[#01aef0] font-semibold">*</span>
                   </label>
                   <input
+                    name='lastfourdigits'
+                    value={venmoDetails.lastfourdigits}
+                    onChange={handleVenmoInputChange}
                     type="password"
                     inputMode="numeric"
                     maxLength={4}
@@ -286,11 +441,11 @@ const AddPayment = () => {
                     required
                   />
                 </div>
-                <button className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
+                <button type='submit' className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
                   Add
                 </button>
               </form>
-              <form>
+              <form onSubmit={handlePaypalSubmit}>
                 <h1 className="text-xl font-semibold text-gray-600 mt-8">
                   Paypal
                 </h1>
@@ -304,12 +459,15 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="email"
+                    name='email'
+                    value={paypalDetails.email}
+                    onChange={handlePaypalInputChange}
                     placeholder="Email"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
                   />
                 </div>
-                <button className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
+                <button type='submit' className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
                   Add
                 </button>
               </form>
