@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { BASE_URL } from '../utils/apiConfig'
 
 const ViewPayment = () => {
   const [bankDetails, setBankDetails] = useState<any[]>([]) // For displaying fetched data
@@ -9,7 +10,7 @@ const ViewPayment = () => {
   useEffect(() => {
     const fetchBankDetails = async () => {
       try {
-        const response = await fetch('https://donate.islamic-globalrelief.com/api/bank-details')
+        const response = await fetch(`${BASE_URL}/api/bank-details`)
         if (!response.ok) {
           throw new Error('Failed to fetch bank details')
         }
