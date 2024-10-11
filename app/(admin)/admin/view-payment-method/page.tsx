@@ -5,10 +5,12 @@ import { BASE_URL } from '../utils/apiConfig'
 import ZelleDetails from './component/ZelleDetails'
 
 const ViewPayment = () => {
-  const [bankDetails, setBankDetails] = useState<any[]>([]) // Store the entire array of bank details
-  const [zelleDetails, setZelleDetails] = useState<any[]>([]) // Store the entire array of Zelle details
-  const [venmoDetails, setVenmoDetails] = useState<any[]>([]) // Store the entire array of Zelle details
-  const [paypalDetails, setPaypalDetails] = useState<any[]>([]) // Store the entire array of Zelle details
+  const [bankDetails, setBankDetails] = useState<any[]>([])
+  const [zelleDetails, setZelleDetails] = useState<any[]>([])
+  const [venmoDetails, setVenmoDetails] = useState<any[]>([])
+  const [paypalDetails, setPaypalDetails] = useState<any[]>([])
+  const [cashappDetails, setCashappDetails] = useState<any[]>([])
+  const [bitcoinDetails, setBitcoinDetails] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -43,10 +45,9 @@ const ViewPayment = () => {
         )
       }
     }
-    
+
     const fetchVenmoDetails = async () => {
       try {
-        // Replace with actual API endpoint for Zelle details
         const response = await axios.get(`${BASE_URL}/api/venmo-details`)
         if (response.data.success && response.data.data.length > 0) {
           setVenmoDetails(response.data.data) // Set the entire array
@@ -62,7 +63,6 @@ const ViewPayment = () => {
 
     const fetchPaypalDetails = async () => {
       try {
-        // Replace with actual API endpoint for Zelle details
         const response = await axios.get(`${BASE_URL}/api/paypal-details`)
         if (response.data.success && response.data.data.length > 0) {
           setPaypalDetails(response.data.data) // Set the entire array
@@ -76,8 +76,45 @@ const ViewPayment = () => {
       }
     }
 
+    const fetchCashappDetails = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/cashapp-details`)
+        if (response.data.success && response.data.data.length > 0) {
+          setCashappDetails(response.data.data)
+        } else {
+          setError('No Cashapp details available')
+        }
+      } catch (error: any) {
+        setError(
+          error.response?.data?.message || 'Failed to fetch cashapp details'
+        )
+      }
+    }
 
-    Promise.all([fetchBankDetails(), fetchZelleDetails(), fetchVenmoDetails(), fetchPaypalDetails()]).finally(() => {
+    const fetchBitcoinDetails = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/bitcoin-details`)
+        if (response.data.success && response.data.data.length > 0) {
+          setBitcoinDetails(response.data.data)
+          console.log(response.data.data)
+        } else {
+          setError('No Bitcoin details available')
+        }
+      } catch (error: any) {
+        setError(
+          error.response?.data?.message || 'Failed to fetch cashapp details'
+        )
+      }
+    }
+
+    Promise.all([
+      fetchBankDetails(),
+      fetchZelleDetails(),
+      fetchVenmoDetails(),
+      fetchPaypalDetails(),
+      fetchCashappDetails(),
+      fetchBitcoinDetails(),
+    ]).finally(() => {
       setLoading(false)
     })
   }, [])
@@ -284,7 +321,7 @@ const ViewPayment = () => {
               <h1 className="text-xl font-semibold text-gray-600 mt-2">
                 Paypal Details
               </h1>
-              { paypalDetails.length > 0 ? (
+              {paypalDetails.length > 0 ? (
                 <div className="table w-full border-collapse border border-gray-300">
                   {/* Table Header */}
                   <div className="table-row bg-gray-100 font-semibold text-sm md:text-base">
@@ -315,6 +352,102 @@ const ViewPayment = () => {
               <div className="mt-4 p-4 bg-gray-100 rounded-md">
                 <p className="text-sm text-gray-600">
                   Here you can find the Paypal details used for transactions.
+                  Please ensure to verify the details before sending any
+                  payments. If you have any questions, feel free to reach out to
+                  our support team.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Cashapp Details Section */}
+          <div className="flex flex-col mt-6 bg-white shadow-md pb-10 overflow-auto">
+            <div className="flex flex-col ml-4 mr-4">
+              <h1 className="text-xl font-semibold text-gray-600 mt-2">
+                Cashapp Details
+              </h1>
+              {cashappDetails.length > 0 ? (
+                <div className="table w-full border-collapse border border-gray-300">
+                  {/* Table Header */}
+                  <div className="table-row bg-gray-100 font-semibold text-sm md:text-base">
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Name
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Cashtag
+                    </div>
+                  </div>
+                  {/* Table Rows */}
+                  {cashappDetails.map((cashappDetail) => (
+                    <div
+                      key={cashappDetail.id}
+                      className="table-row text-sm md:text-base"
+                    >
+                      <div className="table-cell p-2 md:p-4 border border-gray-300">
+                        {cashappDetail.name}
+                      </div>
+                      <div className="table-cell p-2 md:p-4 border border-gray-300">
+                        {cashappDetail.cashtag}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="table-row">
+                  <div className="table-cell p-2 md:p-4 border border-gray-300 text-center w-full">
+                    No Cashapp details available
+                  </div>
+                </div>
+              )}
+              {/* Dummy Write Up */}
+              <div className="mt-4 p-4 bg-gray-100 rounded-md">
+                <p className="text-sm text-gray-600">
+                  Here you can find the Cashapp details used for transactions.
+                  Please ensure to verify the details before sending any
+                  payments. If you have any questions, feel free to reach out to
+                  our support team.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bitcoin Details Section */}
+          <div className="flex flex-col mt-6 bg-white shadow-md pb-10 overflow-auto">
+            <div className="flex flex-col ml-4 mr-4">
+              <h1 className="text-xl font-semibold text-gray-600 mt-2">
+                Bitcoin Details
+              </h1>
+              {bitcoinDetails.length > 0 ? (
+                <div className="table w-full border-collapse border border-gray-300">
+                  {/* Table Header */}
+                  <div className="table-row bg-gray-100 font-semibold text-sm md:text-base">
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Bitcoin Address
+                    </div>
+                  </div>
+                  {/* Table Rows */}
+                  {bitcoinDetails.map((bitcoinDetail) => (
+                    <div
+                      key={bitcoinDetail.id}
+                      className="table-row text-sm md:text-base"
+                    >
+                      <div className="table-cell p-2 md:p-4 border border-gray-300">
+                        {bitcoinDetail.bitcoinaddress}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="table-row">
+                  <div className="table-cell p-2 md:p-4 border border-gray-300 text-center w-full">
+                    No Bitcoin details available
+                  </div>
+                </div>
+              )}
+              {/* Dummy Write Up */}
+              <div className="mt-4 p-4 bg-gray-100 rounded-md">
+                <p className="text-sm text-gray-600">
+                  Here you can find the Bitvoin details used for transactions.
                   Please ensure to verify the details before sending any
                   payments. If you have any questions, feel free to reach out to
                   our support team.

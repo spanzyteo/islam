@@ -25,10 +25,19 @@ const AddPayment = () => {
   const [paypalDetails, setPaypalDetails] = useState({
     email: ''
   })
+  const [cashappDetails, setCashappDetails] = useState({
+    name: '',
+    cashtag: ''
+  })
+  const [bitcoinDetails, setBitcoinDetails] = useState({
+    bitcoinaddress: ''
+  })
   const [loading, setLoading] = useState(false)
   const [zelleLoading, setZelleLoading] = useState(false)
   const [venmoLoading, setVenmoLoading] = useState(false)
   const [paypalLoading, setPaypalLoading] = useState(false)
+  const [cashappLoading, setCashappLoading] = useState(false)
+  const [bitcoinLoading, setBitcoinLoading] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -54,6 +63,20 @@ const AddPayment = () => {
   const handlePaypalInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaypalDetails({
       ...paypalDetails,
+      [e.target.name]: e.target.value,
+    })
+  }
+  
+  const handleCashtagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCashappDetails({
+      ...cashappDetails,
+      [e.target.name]: e.target.value,
+    })
+  }
+  
+  const handleBitcoinInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBitcoinDetails({
+      ...bitcoinDetails,
       [e.target.name]: e.target.value,
     })
   }
@@ -119,8 +142,8 @@ const AddPayment = () => {
       } else {
         console.error('Error posting zelle data')
       }
-    } catch (error) {
-      console.error('Error:', error)
+    } catch (error: any) {
+      console.error('Error:', error.response?.data || error.message)
     } finally {
       setZelleLoading(false)
     }
@@ -146,8 +169,6 @@ const AddPayment = () => {
           username: '',
           lastfourdigits: '',
         })
-        console.log('venmo form added')
-        console.log(venmoDetails)
       } else {
         console.error('Error posting venmo data')
       }
@@ -177,8 +198,6 @@ const AddPayment = () => {
         setPaypalDetails({
           email: '',
         })
-        console.log('paypal form added')
-        console.log(paypalDetails)
       } else {
         console.error('Error posting paypal data')
       }
@@ -186,6 +205,67 @@ const AddPayment = () => {
       console.error('Error:', error)
     } finally {
       setPaypalLoading(false)
+    }
+  }
+  
+  const handleCashappSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setCashappLoading(true)
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/storeCashappDetails`,
+        cashappDetails,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        setCashappDetails({
+          name: '',
+          cashtag: '',
+        })
+      } else {
+        console.error('Error posting cashapp data')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setCashappLoading(false)
+    }
+  }
+  
+  const handleBitcoinSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setBitcoinLoading(true)
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/storeBiitcoinDetails`,
+        bitcoinDetails,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        setBitcoinDetails({
+          bitcoinaddress: ''
+        })
+        console.log('bitcoin form added')
+        console.log(bitcoinDetails)
+      } else {
+        console.error('Error posting bitcoin data')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setBitcoinLoading(false)
     }
   }
   return (
@@ -471,10 +551,28 @@ const AddPayment = () => {
                   Add
                 </button>
               </form>
-              <form>
+              <form onSubmit={handleCashappSubmit}>
                 <h1 className="text-xl font-semibold text-gray-600 mt-8">
                   Cash app name
                 </h1>
+                <div className="flex flex-col gap-2 mt-4">
+                  <label
+                    htmlFor="name"
+                    className="text-[#495057] font-semibold"
+                  >
+                    Name
+                    <span className="text-[#01aef0] font-semibold">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name='name'
+                    value={cashappDetails.name}
+                    onChange={handleCashtagInputChange}
+                    placeholder="Name"
+                    className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
+                    required
+                  />
+                </div>
                 <div className="flex flex-col gap-2 mt-4">
                   <label
                     htmlFor="cashtag"
@@ -486,15 +584,18 @@ const AddPayment = () => {
                   <input
                     type="text"
                     placeholder="Cashtag"
+                    name='cashtag'
+                    value={cashappDetails.cashtag}
+                    onChange={handleCashtagInputChange}
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
                   />
                 </div>
-                <button className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
+                <button type='submit' className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
                   Add
                 </button>
               </form>
-              <form>
+              <form onSubmit={handleBitcoinSubmit}>
                 <h1 className="text-xl font-semibold text-gray-600 mt-8">
                   Bitcoin
                 </h1>
@@ -508,12 +609,15 @@ const AddPayment = () => {
                   </label>
                   <input
                     type="text"
+                    name='bitcoinaddress'
+                    value={bitcoinDetails.bitcoinaddress}
+                    onChange={handleBitcoinInputChange}
                     placeholder="Bitcoin address"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
                   />
                 </div>
-                <button className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
+                <button type='submit' className="bg-[#01aef0] p-2 mt-4 text-white px-6 uppercase font-semibold rounded-sm hover:opacity-80 transition-all ease-in-out duration-300">
                   Add
                 </button>
               </form>
