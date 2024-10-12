@@ -105,10 +105,10 @@ const FundSelection = () => {
             Global Emergencies
           </button>
         </div>
-        {isSadaqah && <Sadaqah selectedFund={selectedFund} />}
-        {isWaterForLife && <WaterForLife selectedFund={selectedFund} />}
-        {orphan && <Orphan selectedFund={selectedFund} />}
-        {globalEmergencies && <GlobalEmergencies selectedFund={selectedFund} />}
+        {isSadaqah && <Sadaqah/>}
+        {isWaterForLife && <WaterForLife/>}
+        {orphan && <Orphan/>}
+        {globalEmergencies && <GlobalEmergencies/>}
         <div className="flex items-center justify-between mt-8">
           <Link href={'/donate'}>
             <button className="text-2xl font-bold bg-white flex items-center p-2 px-4 gap-2 text-[#A7A7A7] hover:bg-gray-300 hover:text-[#555555] transition-all duration-300 ease-in-out">
