@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { BASE_URL } from '../../../utils/apiConfig'
 
-const page = () => {
+const EditBitcoinDetails = () => {
   const { id } = useParams()
   const router = useRouter()
 
@@ -110,4 +110,4 @@ const page = () => {
   )
 }
 
-export default page
+export default EditBitcoinDetails
