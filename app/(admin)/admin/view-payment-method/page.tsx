@@ -2,9 +2,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../utils/apiConfig'
-import ZelleDetails from './component/ZelleDetails'
+import { useRouter } from 'next/navigation'
 
 const ViewPayment = () => {
+  const router = useRouter()
   const [bankDetails, setBankDetails] = useState<any[]>([])
   const [zelleDetails, setZelleDetails] = useState<any[]>([])
   const [venmoDetails, setVenmoDetails] = useState<any[]>([])
@@ -14,6 +15,29 @@ const ViewPayment = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  const handleBankEdit = (id: string) => {
+    router.push(`/admin/view-payment-method/edit-bank-details/${id}`)
+  }
+
+  const handleZelleEdit = (id: string) => {
+    router.push(`/admin/view-payment-method/edit-zelle-details/${id}`)
+  }
+
+  const handleVenmoEdit = (id: string) => {
+    router.push(`/admin/view-payment-method/edit-venmo-details/${id}`)
+  }
+
+  const handlePaypalEdit = (id: string) => {
+    router.push(`/admin/view-payment-method/edit-paypal-details/${id}`)
+  }
+
+  const handleCashappEdit = (id: string) => {
+    router.push(`/admin/view-payment-method/edit-cashapp-details/${id}`)
+  }
+
+  const handleBitcoinEdit = (id: string) => {
+    router.push(`/admin/view-payment-method/edit-bitcoin-details/${id}`)
+  }
   useEffect(() => {
     const fetchBankDetails = async () => {
       try {
@@ -96,7 +120,6 @@ const ViewPayment = () => {
         const response = await axios.get(`${BASE_URL}/api/bitcoin-details`)
         if (response.data.success && response.data.data.length > 0) {
           setBitcoinDetails(response.data.data)
-          console.log(response.data.data)
         } else {
           setError('No Bitcoin details available')
         }
@@ -118,6 +141,119 @@ const ViewPayment = () => {
       setLoading(false)
     })
   }, [])
+
+  const deleteBankDetails = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-bank-details/${id}`
+      )
+      console.log(response.data)
+      if (response.data) {
+        setBankDetails((prevDetails) =>
+          prevDetails.filter((bankDetail) => bankDetail.id !== id)
+        )
+        console.log('Bank detail deleted successfully')
+      } else {
+        setError('Failed to delete bank detail')
+      }
+    } catch (error: any) {
+      setError(error.response?.data?.message || 'Failed to delete bank detail')
+    }
+  }
+
+  const deleteZelleDetails = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-zelle-details/${id}`
+      )
+      if (response.data) {
+        setZelleDetails((prevDetails) =>
+          prevDetails.filter((zelleDetail) => zelleDetail.id !== id)
+        )
+        console.log('Zelle detail deleted successfully')
+      } else {
+        setError('Failed to delete zelle detail')
+      }
+    } catch (error: any) {
+      setError(error.response?.data?.message || 'Failed to delete zelle detail')
+    }
+  }
+
+  const deleteVenmoDetails = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-venmo-details/${id}`
+      )
+      if (response.data) {
+        setVenmoDetails((prevDetails) =>
+          prevDetails.filter((venmoDetail) => venmoDetail.id !== id)
+        )
+      } else {
+        setError('Failed to delete venmo detail')
+      }
+    } catch (error: any) {
+      setError(error.response?.data?.message || 'Failed to delete venmo detail')
+    }
+  }
+
+  const deletePaypalDetails = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-paypal-details/${id}`
+      )
+      console.log(response.data)
+      if (response.data) {
+        setPaypalDetails((prevDetails) =>
+          prevDetails.filter((paypalDetail) => paypalDetail.id !== id)
+        )
+      } else {
+        setError('Failed to delete paypal detail')
+      }
+    } catch (error: any) {
+      setError(
+        error.response?.data?.message || 'Failed to delete paypal detail'
+      )
+    }
+  }
+
+  const deleteCashappDetails = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-cashapp-details/${id}`
+      )
+      console.log(response.data)
+      if (response.data) {
+        setCashappDetails((prevDetails) =>
+          prevDetails.filter((cashappDetail) => cashappDetail.id !== id)
+        )
+      } else {
+        setError('Failed to delete cashapp detail')
+      }
+    } catch (error: any) {
+      setError(
+        error.response?.data?.message || 'Failed to delete cashapp detail'
+      )
+    }
+  }
+
+  const deleteBitcoinDetails = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-bitcoin-details/${id}`
+      )
+      if (response.data) {
+        setBitcoinDetails((prevDetails) =>
+          prevDetails.filter((bitcoinDetail) => bitcoinDetail.id !== id)
+        )
+      } else {
+        setError('Failed to delete bitcoin detail')
+      }
+    } catch (error: any) {
+      setError(
+        error.response?.data?.message || 'Failed to delete bitcoin detail'
+      )
+    }
+  }
 
   if (loading) {
     return <p>Loading...</p>
@@ -166,6 +302,12 @@ const ViewPayment = () => {
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Receiver's Phone
                     </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
                   </div>
                   {/* Table Rows */}
                   {bankDetails.map((bankDetail) => (
@@ -193,6 +335,18 @@ const ViewPayment = () => {
                       </div>
                       <div className="table-cell p-2 md:p-4 border border-gray-300">
                         {bankDetail.receiverphone}
+                      </div>
+                      <div
+                        onClick={() => deleteBankDetails(bankDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => handleBankEdit(bankDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Edit
                       </div>
                     </div>
                   ))}
@@ -226,6 +380,12 @@ const ViewPayment = () => {
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Phone Number
                     </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
                   </div>
                   {/* Table Rows */}
                   {zelleDetails.map((zelleDetail) => (
@@ -241,6 +401,18 @@ const ViewPayment = () => {
                       </div>
                       <div className="table-cell p-2 md:p-4 border border-gray-300">
                         {zelleDetail.phone}
+                      </div>
+                      <div
+                        onClick={() => deleteZelleDetails(zelleDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => handleZelleEdit(zelleDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Edit
                       </div>
                     </div>
                   ))}
@@ -270,7 +442,7 @@ const ViewPayment = () => {
               <h1 className="text-xl font-semibold text-gray-600 mt-2">
                 Venmo Details
               </h1>
-              {zelleDetails.length > 0 ? (
+              {venmoDetails.length > 0 ? (
                 <div className="table w-full border-collapse border border-gray-300">
                   {/* Table Header */}
                   <div className="table-row bg-gray-100 font-semibold text-sm md:text-base">
@@ -279,6 +451,12 @@ const ViewPayment = () => {
                     </div>
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Last Four Digits
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
                     </div>
                   </div>
                   {/* Table Rows */}
@@ -292,6 +470,18 @@ const ViewPayment = () => {
                       </div>
                       <div className="table-cell p-2 md:p-4 border border-gray-300">
                         {venmoDetail.lastfourdigits}
+                      </div>
+                      <div
+                        onClick={() => deleteVenmoDetails(venmoDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => handleVenmoEdit(venmoDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Edit
                       </div>
                     </div>
                   ))}
@@ -328,6 +518,12 @@ const ViewPayment = () => {
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Email
                     </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
                   </div>
                   {/* Table Rows */}
                   {paypalDetails.map((paypalDetail) => (
@@ -337,6 +533,18 @@ const ViewPayment = () => {
                     >
                       <div className="table-cell p-2 md:p-4 border border-gray-300">
                         {paypalDetail.email}
+                      </div>
+                      <div
+                        onClick={() => deletePaypalDetails(paypalDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => handlePaypalEdit(paypalDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Edit
                       </div>
                     </div>
                   ))}
@@ -366,6 +574,9 @@ const ViewPayment = () => {
               <h1 className="text-xl font-semibold text-gray-600 mt-2">
                 Cashapp Details
               </h1>
+              <h1 className="text-xl font-semibold text-gray-600 mt-2">
+                Action
+              </h1>
               {cashappDetails.length > 0 ? (
                 <div className="table w-full border-collapse border border-gray-300">
                   {/* Table Header */}
@@ -375,6 +586,12 @@ const ViewPayment = () => {
                     </div>
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Cashtag
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
                     </div>
                   </div>
                   {/* Table Rows */}
@@ -388,6 +605,18 @@ const ViewPayment = () => {
                       </div>
                       <div className="table-cell p-2 md:p-4 border border-gray-300">
                         {cashappDetail.cashtag}
+                      </div>
+                      <div
+                        onClick={() => deleteCashappDetails(cashappDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => handleCashappEdit(cashappDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Edit
                       </div>
                     </div>
                   ))}
@@ -424,6 +653,12 @@ const ViewPayment = () => {
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Bitcoin Address
                     </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      Action
+                    </div>
                   </div>
                   {/* Table Rows */}
                   {bitcoinDetails.map((bitcoinDetail) => (
@@ -433,6 +668,18 @@ const ViewPayment = () => {
                     >
                       <div className="table-cell p-2 md:p-4 border border-gray-300">
                         {bitcoinDetail.bitcoinaddress}
+                      </div>
+                      <div
+                        onClick={() => deleteBitcoinDetails(bitcoinDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Delete
+                      </div>
+                      <div
+                        onClick={() => handleBitcoinEdit(bitcoinDetail.id)}
+                        className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer"
+                      >
+                        Edit
                       </div>
                     </div>
                   ))}

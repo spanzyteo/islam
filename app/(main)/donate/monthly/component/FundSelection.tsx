@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { sadaqah } from '@/app/(main)/data/donateData'
+import axios from 'axios'
 import { FaRegArrowAltCircleRight } from 'react-icons/fa'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 import Link from 'next/link'
@@ -8,39 +8,57 @@ import WaterForLife from './WaterForLife'
 import GlobalEmergencies from './GlobalEmergencies'
 import Sadaqah from './Sadaqah'
 import Orphan from './Orphan'
+import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
 
 const FundSelection = () => {
   const [orphan, setOrphan] = useState(false)
   const [isSadaqah, setIsSadaqah] = useState(false)
   const [isWaterForLife, setIsWaterForLife] = useState(false)
   const [globalEmergencies, setGlobalEmergencies] = useState(false)
+  const [selectedFund, setSelectedFund] = useState({
+    fund: '',
+  }) // State to hold the selected fund
 
-  const handleSadaqah = () => {
-    setOrphan(false)
-    setIsSadaqah(true)
-    setIsWaterForLife(false)
-    setGlobalEmergencies(false)
+  // Function to handle the selection of a fund type
+  const handleFundSelection = (fundType: string) => {
+    setSelectedFund({ fund: fundType }) // Set the selected fund type
+    setOrphan(fundType === 'Orphan')
+    setIsSadaqah(fundType === 'Sadaqah')
+    setIsWaterForLife(fundType === 'WaterForLife')
+    setGlobalEmergencies(fundType === 'GlobalEmergencies')
   }
 
-  const handleWaterForLife = () => {
-    setOrphan(false)
-    setIsSadaqah(false)
-    setIsWaterForLife(true)
-    setGlobalEmergencies(false)
-  }
+  // Function to handle form submission
+  const handleSubmit = async () => {
+    if (!selectedFund) {
+      alert('Please select a fund')
+      return
+    }
 
-  const handleOrphan = () => {
-    setOrphan(true)
-    setIsSadaqah(false)
-    setIsWaterForLife(false)
-    setGlobalEmergencies(false)
-  }
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/register`,
+        selectedFund,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
 
-  const handleEmergencies = () => {
-    setOrphan(false)
-    setIsSadaqah(false)
-    setIsWaterForLife(false)
-    setGlobalEmergencies(true)
+      if (response.status === 200) {
+        setSelectedFund({
+          fund: '',
+        })
+        console.log('Form submitted successfully:', response.data)
+        console.log(response.data)
+      } else {
+        console.error('Error posting data')
+        console.log('Error occurred')
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    }
   }
 
   return (
@@ -51,7 +69,7 @@ const FundSelection = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <button
-            onClick={handleOrphan}
+            onClick={() => handleFundSelection('Orphan')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
               orphan ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
             }`}
@@ -59,7 +77,7 @@ const FundSelection = () => {
             Orphans
           </button>
           <button
-            onClick={handleSadaqah}
+            onClick={() => handleFundSelection('Sadaqah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
               isSadaqah ? 'bg-[#01aef0] text-white' : 'bg-white text-[#555555]'
             }`}
@@ -67,7 +85,7 @@ const FundSelection = () => {
             Sadaqah
           </button>
           <button
-            onClick={handleWaterForLife}
+            onClick={() => handleFundSelection('WaterForLife')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
               isWaterForLife
                 ? 'bg-[#01aef0] text-white'
@@ -77,7 +95,7 @@ const FundSelection = () => {
             Water For Life
           </button>
           <button
-            onClick={handleEmergencies}
+            onClick={() => handleFundSelection('GlobalEmergencies')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
               globalEmergencies
                 ? 'bg-[#01aef0] text-white'
@@ -87,10 +105,10 @@ const FundSelection = () => {
             Global Emergencies
           </button>
         </div>
-        {isSadaqah && <Sadaqah />}
-        {isWaterForLife && <WaterForLife />}
-        {orphan && <Orphan />}
-        {globalEmergencies && <GlobalEmergencies />}
+        {isSadaqah && <Sadaqah selectedFund={selectedFund} />}
+        {isWaterForLife && <WaterForLife selectedFund={selectedFund} />}
+        {orphan && <Orphan selectedFund={selectedFund} />}
+        {globalEmergencies && <GlobalEmergencies selectedFund={selectedFund} />}
         <div className="flex items-center justify-between mt-8">
           <Link href={'/donate'}>
             <button className="text-2xl font-bold bg-white flex items-center p-2 px-4 gap-2 text-[#A7A7A7] hover:bg-gray-300 hover:text-[#555555] transition-all duration-300 ease-in-out">
@@ -98,12 +116,15 @@ const FundSelection = () => {
               <h1>BACK</h1>
             </button>
           </Link>
-          <Link href={'/donate/monthly/details'}>
-            <button className="text-2xl font-bold bg-[#01aef0] flex items-center p-2 px-4 gap-2 text-white hover:bg-blue-500 transition-all duration-300 ease-in-out">
+          {/* <Link href={'/donate/monthly/details'}> */}
+            <button
+              onClick={handleSubmit}
+              className="text-2xl font-bold bg-[#01aef0] flex items-center p-2 px-4 gap-2 text-white hover:bg-blue-500 transition-all duration-300 ease-in-out"
+            >
               <h1>NEXT</h1>
               <FaRegArrowAltCircleRight className="h-[30px] w-[30px]" />
             </button>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     </div>

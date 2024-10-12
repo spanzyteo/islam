@@ -1,6 +1,36 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { BASE_URL } from '../utils/apiConfig'
 
-const page = () => {
+const UsersList = () => {
+  const [users, setUsers] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      console.log('Fetching users...')
+      try {
+        const response = await axios.get(`${BASE_URL}/api/users-details`)
+        console.log(response.data)
+        if (response.data.success && response.data.data.length > 0) {
+          setUsers(response.data.data)
+          console.log(response.data.data)
+        } else {
+          setError('No list of Users')
+        }
+      } catch (error: any) {
+        setError(
+          error.response?.data?.message || 'Failed to fetch user details'
+        )
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUsers()
+  }, [])
   return (
     <div className="bg-[#F2F2F2] min-h-screen p-4">
       <div className="md:ml-[320px] ml-[1rem] flex flex-col">
@@ -40,35 +70,41 @@ const page = () => {
                 </div>
               </div>
               {/* Table Rows */}
-              <div className="table-row text-sm md:text-base">
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  Mr
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  Joshua
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  Titus
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  tech@gmail.com
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  08285372216
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  opp front of trailer jorge
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  opp front of trailer jorge mansion
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  Lagos
-                </div>
-                <div className="table-cell p-2 md:p-4 border border-gray-300">
-                  Nigeria
-                </div>
-              </div>
+              {users.length > 0 ? (
+                users.map((user) => (
+                  <div key={user.id} className="table-row text-sm md:text-base">
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.title}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.firstname}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.lastname}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.email}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.phone}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.address1}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.address2}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.town}
+                    </div>
+                    <div className="table-cell p-2 md:p-4 border border-gray-300">
+                      {user.country}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No users Available</p>
+              )}
             </div>
           </div>
         </div>
@@ -77,4 +113,4 @@ const page = () => {
   )
 }
 
-export default page
+export default UsersList
