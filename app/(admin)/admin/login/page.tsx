@@ -23,7 +23,7 @@ const Login = () => {
       <div className="mt-32 h-[120px] w-[300px]">
         <Image src={'/logo.png'} alt="img" height={100} width={200} />
       </div>
-      <div className="mt-10 flex flex-col items-start justify-center w-[450px] ">
+      <div className="mt-10 flex flex-col items-start justify-center md:w-[450px] w-[85%] ">
         <h1 className="text-2xl font-semibold">Login</h1>
         <input
           className="border p-2 mt-8 border-black rounded-md w-full"
