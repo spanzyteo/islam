@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import Dashboard from './components/Dashboard'
 import { useRouter } from 'next/navigation'
 
-const page = () => {
+const Admin = () => {
   const router = useRouter()
 
   useEffect(() => {
@@ -17,4 +17,4 @@ const page = () => {
   </div>
 }
 
-export default page
+export default Admin
