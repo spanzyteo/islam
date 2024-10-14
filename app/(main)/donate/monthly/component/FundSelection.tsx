@@ -8,7 +8,7 @@ import WaterForLife from './WaterForLife'
 import GlobalEmergencies from './GlobalEmergencies'
 import Sadaqah from './Sadaqah'
 import Orphan from './Orphan'
-import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
+// import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
 
 const FundSelection = () => {
   const [orphan, setOrphan] = useState(false)
@@ -17,49 +17,48 @@ const FundSelection = () => {
   const [globalEmergencies, setGlobalEmergencies] = useState(false)
   const [selectedFund, setSelectedFund] = useState({
     fund: '',
-  }) // State to hold the selected fund
+  }) 
 
   // Function to handle the selection of a fund type
   const handleFundSelection = (fundType: string) => {
-    setSelectedFund({ fund: fundType }) // Set the selected fund type
+    setSelectedFund({ fund: fundType }) 
     setOrphan(fundType === 'Orphan')
     setIsSadaqah(fundType === 'Sadaqah')
     setIsWaterForLife(fundType === 'WaterForLife')
     setGlobalEmergencies(fundType === 'GlobalEmergencies')
   }
 
-  // Function to handle form submission
-  const handleSubmit = async () => {
-    if (!selectedFund) {
-      alert('Please select a fund')
-      return
-    }
+  // const handleSubmit = async () => {
+  //   if (!selectedFund) {
+  //     alert('Please select a fund')
+  //     return
+  //   }
 
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/api/register`,
-        selectedFund,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      )
+  //   try {
+  //     const response = await axios.post(
+  //       `${BASE_URL}/api/register`,
+  //       selectedFund,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       }
+  //     )
 
-      if (response.status === 200) {
-        setSelectedFund({
-          fund: '',
-        })
-        console.log('Form submitted successfully:', response.data)
-        console.log(response.data)
-      } else {
-        console.error('Error posting data')
-        console.log('Error occurred')
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-    }
-  }
+  //     if (response.status === 200) {
+  //       setSelectedFund({
+  //         fund: '',
+  //       })
+  //       console.log('Form submitted successfully:', response.data)
+  //       console.log(response.data)
+  //     } else {
+  //       console.error('Error posting data')
+  //       console.log('Error occurred')
+  //     }
+  //   } catch (error) {
+  //     console.error('Error submitting form:', error)
+  //   }
+  // }
 
   return (
     <div className="mt-40 flex justify-center mx-auto">
@@ -116,15 +115,14 @@ const FundSelection = () => {
               <h1>BACK</h1>
             </button>
           </Link>
-          {/* <Link href={'/donate/monthly/details'}> */}
+          <Link href={'/donate/monthly/details'}>
             <button
-              onClick={handleSubmit}
               className="text-2xl font-bold bg-[#01aef0] flex items-center p-2 px-4 gap-2 text-white hover:bg-blue-500 transition-all duration-300 ease-in-out"
             >
               <h1>NEXT</h1>
               <FaRegArrowAltCircleRight className="h-[30px] w-[30px]" />
             </button>
-          {/* </Link> */}
+          </Link>
         </div>
       </div>
     </div>

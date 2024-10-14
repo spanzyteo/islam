@@ -109,7 +109,6 @@ const AddPayment = () => {
         console.log('form added')
       } else {
         console.error('Error posting data')
-        console.log('Error occurred')
       }
     } catch (error) {
       console.error('Error:', error)
