@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa'
+import {
+  FaRegArrowAltCircleLeft,
+  FaRegArrowAltCircleRight,
+} from 'react-icons/fa'
+import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
+import axios from 'axios'
 
 const PaymentDetails = () => {
+  const [bankDetails, setBankDetails] = useState<any[]>([])
+  const [zelleDetails, setZelleDetails] = useState<any[]>([])
+  const [venmoDetails, setVenmoDetails] = useState<any[]>([])
+  const [paypalDetails, setPaypalDetails] = useState<any[]>([])
+  const [cashappDetails, setCashappDetails] = useState<any[]>([])
+  const [bitcoinDetails, setBitcoinDetails] = useState<any[]>([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const fetchBankDetails = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/bank-details`)
+        if (response.data.success && response.data.data.length > 0) {
+          setBankDetails(response.data.data) // Set the entire array
+        } else {
+          setError('No bank details available')
+        }
+      } catch (error: any) {
+        setError(
+          error.response?.data?.message || 'Failed to fetch bank details'
+        )
+      }
+    }
+  }, [])
+
   return (
     <div className="mt-40 flex justify-center mx-auto">
       <div className="bg-gray-200 w-[95%] sm:w-[95%] lg:w-[60%] flex flex-col md:px-10 px-5 rounded-md pb-10 ">
@@ -94,7 +124,9 @@ const PaymentDetails = () => {
               <h1>BACK</h1>
             </button>
           </Link>
-          <Link href={'/donate/monthly/details/payment-details/proof-of-payment'}>
+          <Link
+            href={'/donate/monthly/details/payment-details/proof-of-payment'}
+          >
             <button className="text-2xl font-bold bg-[#01aef0] flex items-center p-2 px-4 gap-2 text-white hover:bg-blue-500 transition-all duration-300 ease-in-out">
               <h1>NEXT</h1>
               <FaRegArrowAltCircleRight className="h-[30px] w-[30px]" />
