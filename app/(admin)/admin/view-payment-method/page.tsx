@@ -125,7 +125,7 @@ const ViewPayment = () => {
         }
       } catch (error: any) {
         setError(
-          error.response?.data?.message || 'Failed to fetch cashapp details'
+          error.response?.data?.message || 'Failed to fetch bitcoin details'
         )
       }
     }
