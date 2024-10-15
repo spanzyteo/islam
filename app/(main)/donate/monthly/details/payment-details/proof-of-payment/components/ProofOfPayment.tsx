@@ -1,11 +1,26 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ClipLoader } from 'react-spinners'
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from 'firebase/storage'
+import { app } from '@/app/firebase'
+import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const ProofOfPayment = () => {
+  const router = useRouter()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [filePerc, setFilePerc] = useState(0)
+  const [fileError, setFileError] = useState(false)
+  const [formData, setFormData] = useState({})
+  console.log(formData)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -15,7 +30,36 @@ const ProofOfPayment = () => {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (selectedFile) {
+      handleFileUpload(selectedFile)
+    }
+  }, [selectedFile])
+
+  const handleFileUpload = (file: any) => {
+    const storage = getStorage(app)
+    const fileName = new Date().getTime() + file.name
+    const storageRef = ref(storage, fileName)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        setFilePerc(Math.round(progress))
+      },
+      (error: any) => {
+        setFileError(true)
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downLoadUrl) => {
+          setFormData({ ...formData, imageLink: downLoadUrl })
+        })
+      }
+    )
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!selectedFile) {
       setError('Please select an image file.')
@@ -26,11 +70,37 @@ const ProofOfPayment = () => {
     setError('')
 
     // Simulating an API call or file submission
-    setTimeout(() => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/storePaymentDetails`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        console.log(formData)
+        setFormData({
+          imageLink: '',
+        })
+        console.log('picture added')
+        setTimeout(() => {
+          setLoading(false)
+          alert('File successfully submitted!')
+          setSelectedFile(null) // Clear the file input after submission
+        }, 2000) // Simulates a 2-second submission delay
+        router.push('/')
+      } else {
+        console.error('Error posting image')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
       setLoading(false)
-      alert('File successfully submitted!')
-      setSelectedFile(null) // Clear the file input after submission
-    }, 2000) // Simulates a 2-second submission delay
+    }
   }
   return (
     <div className="mt-40 flex justify-center mx-auto">
@@ -53,6 +123,19 @@ const ProofOfPayment = () => {
             {error && (
               <p className="text-red-500 text-md font-semibold">{error}</p>
             )}
+            {fileError ? (
+              <span className="text-red-500 text-md font-semibold">
+                Error Image upload
+              </span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span>{`Uploading ${filePerc}%`}</span>
+            ) : filePerc === 100 ? (
+              <span className="text-green-500 text-md">
+                Image successfully uploaded
+              </span>
+            ) : (
+              ''
+            )}
           </div>
           <button
             type="submit"
@@ -65,7 +148,7 @@ const ProofOfPayment = () => {
                 <span className="ml-2 font-semibold">Submitting...</span>
               </div>
             ) : (
-              <div className='text-lg font-semibold'>Submit Proof</div>
+              <div className="text-lg font-semibold">Submit Proof</div>
             )}
           </button>
         </form>
