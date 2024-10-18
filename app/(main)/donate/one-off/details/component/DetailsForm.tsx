@@ -9,6 +9,8 @@ import Select, { SingleValue } from 'react-select'
 import countryList from 'react-select-country-list'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
 
 type CountryOption = {
   value: string
@@ -20,27 +22,27 @@ const DetailsForm = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [formData, setFormData] = useState({
     title: '',
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
-    contactNumber: '',
-    address: '',
+    phone: '',
+    address1: '',
     address2: '',
-    city: '',
+    town: '',
     country: '',
   })
-  const [errors, setErrors] = useState({
-    title: false,
-    firstName: false,
-    lastName: false,
-    email: false,
-    address: false,
-    city: false,
-  })
+  const [loading, setLoading] = useState(false)
+
   const options = countryList().getData()
 
   const changeHandler = (val: SingleValue<CountryOption>) => {
     setValue(val)
+    if (val) {
+      setFormData({
+        ...formData,
+        country: val.value,
+      })
+    }
   }
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked)
@@ -49,29 +51,44 @@ const DetailsForm = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    setErrors((prev) => ({ ...prev, [name]: false }))
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
 
-    const newErrors = {
-      title: formData.title === '',
-      firstName: formData.firstName === '',
-      lastName: formData.lastName === '',
-      email: formData.email === '',
-      address: formData.address === '',
-      city: formData.city === '',
-    }
+    try {
+      const response = await axios.post(`${BASE_URL}/api/register`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-    setErrors(newErrors)
-
-    const formIsValid = !Object.values(newErrors).includes(true)
-
-    if (formIsValid) {
-      router.push('/donate/one-off/details/payment-details')
+      if (response.status === 200) {
+        setFormData({
+          title: '',
+          firstname: '',
+          lastname: '',
+          email: '',
+          phone: '',
+          address1: '',
+          address2: '',
+          town: '',
+          country: '',
+        })
+        console.log('form added')
+        router.push('/donate/one-off/details/payment-details')
+      } else {
+        console.error('Error posting data')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -90,11 +107,7 @@ const DetailsForm = () => {
               <select
                 name="title"
                 id="title"
-                className={`md:w-[93px] md:h-[37px] px-1 py-2 text-[#495057] focus:outline-none ${
-                  errors.title
-                    ? 'border-2 border-red-500'
-                    : 'focus:border-2 focus:border-[#01aef0]'
-                } transition duration-300`}
+                className="md:w-[93px] md:h-[37px] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
                 value={formData.title}
                 onChange={handleInputChange}
                 required
@@ -116,14 +129,10 @@ const DetailsForm = () => {
               </label>
               <input
                 type="text"
-                name="firstName"
+                name="firstname"
                 placeholder="First Name"
-                className={`md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none ${
-                  errors.firstName
-                    ? 'border-2 border-red-500'
-                    : 'focus:border-2 focus:border-[#01aef0]'
-                } transition duration-300`}
-                value={formData.firstName}
+                className="md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0]  transition duration-300"
+                value={formData.firstname}
                 onChange={handleInputChange}
                 required
               />
@@ -138,14 +147,10 @@ const DetailsForm = () => {
               </label>
               <input
                 type="text"
-                name="lastName"
+                name="lastname"
                 placeholder="Last Name"
-                className={`md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none ${
-                  errors.lastName
-                    ? 'border-2 border-red-500'
-                    : 'focus:border-2 focus:border-[#01aef0]'
-                } transition duration-300`}
-                value={formData.lastName}
+                className="md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0]  transition duration-300"
+                value={formData.lastname}
                 onChange={handleInputChange}
                 required
               />
@@ -161,11 +166,7 @@ const DetailsForm = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
-                className={`md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none ${
-                  errors.email
-                    ? 'border-2 border-red-500'
-                    : 'focus:border-2 focus:border-[#01aef0]'
-                } transition duration-300`}
+                className="md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0]  transition duration-300"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
@@ -180,10 +181,10 @@ const DetailsForm = () => {
               </label>
               <input
                 type="number"
-                name="contact"
+                name="phone"
                 placeholder="Number"
                 className="md:h-[37px] md:w-[342px] px-2 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
-                value={formData.contactNumber}
+                value={formData.phone}
                 onChange={handleInputChange}
               />
             </div>
@@ -196,14 +197,10 @@ const DetailsForm = () => {
               </label>
               <input
                 type="text"
-                name="address"
+                name="address1"
                 placeholder="123 High Street"
-                className={`md:h-[37px] md:w-[100%] px-2 py-2 text-[#495057] focus:outline-none ${
-                  errors.address
-                    ? 'border-2 border-red-500'
-                    : 'focus:border-2 focus:border-[#01aef0]'
-                } transition duration-300`}
-                value={formData.address}
+                className="md:h-[37px] md:w-[100%] px-2 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
+                value={formData.address1}
                 onChange={handleInputChange}
                 required
               />
@@ -233,14 +230,10 @@ const DetailsForm = () => {
               </label>
               <input
                 type="text"
-                name="city"
+                name="town"
                 placeholder="Enter City"
-                className={`md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none ${
-                  errors.city
-                    ? 'border-2 border-red-500'
-                    : 'focus:border-2 focus:border-[#01aef0]'
-                } transition duration-300`}
-                value={formData.city}
+                className="md:h-[37px] md:w-[263px] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
+                value={formData.town}
                 onChange={handleInputChange}
                 required
               />
@@ -250,6 +243,7 @@ const DetailsForm = () => {
                 Country
               </label>
               <Select
+                name="country"
                 options={options}
                 value={value}
                 onChange={changeHandler}

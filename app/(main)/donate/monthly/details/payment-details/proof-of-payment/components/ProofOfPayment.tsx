@@ -92,7 +92,7 @@ const ProofOfPayment = () => {
           alert('File successfully submitted!')
           setSelectedFile(null) // Clear the file input after submission
         }, 2000) // Simulates a 2-second submission delay
-        router.push('/')
+        router.push('/donate/thank-you')
       } else {
         console.error('Error posting image')
       }
@@ -104,7 +104,7 @@ const ProofOfPayment = () => {
   }
   return (
     <div className="mt-40 flex justify-center mx-auto">
-      <div className="bg-gray-200 w-[95%] sm:w-[95%] lg:w-[60%] flex flex-col md:px-10 px-5 rounded-md pb-10 ">
+      <div className="bg-gray-200 w-[95%] sm:w-[95%] lg:w-[60%] flex flex-col md:px-10 px-5 rounded-md pb-10">
         <h1 className="text-[#01aef0] uppercase text-4xl font-bold mt-16 text-center">
           Your Proof Of Payment
         </h1>
