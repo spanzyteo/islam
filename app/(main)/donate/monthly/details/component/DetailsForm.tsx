@@ -81,7 +81,7 @@ const DetailsForm = () => {
           country: '',
         })
         console.log('form added');
-        router.push('/donate/monthly/details/payment-details')
+        router.push('/donate/monthly/details/payment')
       }else {
         console.error('Error posting data')
       }

@@ -19,32 +19,18 @@ import Humanitarians from './Humanitarians'
 import GlobalEmergencies from './GlobalEmergencies'
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa'
 import Link from 'next/link'
+import { useFund } from '@/app/(main)/utils/Context'
+
 
 const FundSelection = () => {
-  const [emergencyAppeal, setEmergencyAppeal] = useState(false)
-  const [zakat, setZakat] = useState(false)
-  const [sadaqah, setSadaqah] = useState(false)
-  const [neededMost, setNeededMost] = useState(false)
-  const [fidyah, setFidyah] = useState(false)
-  const [kaffarah, setKaffarah] = useState(false)
-  const [sudanAppeal, setSudanAppeal] = useState(false)
-  const [syriaAppeal, setSyriaAppeal] = useState(false)
-  const [yemenAppeal, setYemenAppeal] = useState(false)
-  const [waterForLife, setWaterForLife] = useState(false)
-  const [orphansAndChildren, setOrphansAndChildren] = useState(false)
-  const [sadaqahJariya, setSadaqahJaria] = useState(false)
-  const [peopleInDebt, setPeopleInDebt] = useState(false)
-  const [waqf, setWaqf] = useState(false)
-  const [interest, setInterest] = useState(false)
-  const [humanitarians, setHumanitarians] = useState(false)
-  const [globalEmergencies, setGlobalEmergencies] = useState(false)
+  const { state, dispatch } = useFund()
 
   const [selectedFund, setSelectedFund] = useState<string | null>(null)
-  
+
   const componentRef = useRef<HTMLDivElement>(null)
 
-  const handleFundSelection = (fund: string) => {
-    setSelectedFund(fund)
+  const handleFundSelection = (fundType: string) => {
+    dispatch({ type: 'SELECT_FUND', payload: fundType })
 
     setTimeout(() => {
       if (componentRef.current) {
@@ -55,255 +41,7 @@ const FundSelection = () => {
           behavior: 'smooth',
         })
       }
-    }, 100) 
-  }
-
-  const handleFidya = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(true)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleKaffarah = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(true)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleSudanAppeal = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(true)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleSyriaAppeal = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(true)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleYemenAppeal = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(true)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleWaterForLife = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(true)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleOrphansAndChildren = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(true)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleSadaqahJaria = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(true)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handlePeopleInDebt = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(true)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleWaqf = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(true)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleInterest = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(true)
-    setHumanitarians(false)
-    setGlobalEmergencies(false)
-  }
-  const handleHumanitarians = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(true)
-    setGlobalEmergencies(false)
-  }
-  const handleGlobalEmergencies = () => {
-    setEmergencyAppeal(false)
-    setZakat(false)
-    setSadaqah(false)
-    setNeededMost(false)
-    setFidyah(false)
-    setKaffarah(false)
-    setSudanAppeal(false)
-    setSyriaAppeal(false)
-    setYemenAppeal(false)
-    setWaterForLife(false)
-    setOrphansAndChildren(false)
-    setSadaqahJaria(false)
-    setPeopleInDebt(false)
-    setWaqf(false)
-    setInterest(false)
-    setHumanitarians(false)
-    setGlobalEmergencies(true)
+    }, 100)
   }
 
   return (
@@ -316,7 +54,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('emergencyAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'emergencyAppeal'
+              state.selectedFund === 'emergencyAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -326,7 +64,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('zakat')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'zakat'
+              state.selectedFund === 'zakat'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -336,7 +74,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('sadaqah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'sadaqah'
+              state.selectedFund === 'sadaqah'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -346,7 +84,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('neededMost')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'neededMost'
+              state.selectedFund === 'neededMost'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -356,7 +94,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('fidyah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'fidyah'
+              state.selectedFund === 'fidyah'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -366,7 +104,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('kafarrah')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'kafarrah'
+              state.selectedFund === 'kafarrah'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -376,7 +114,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('sudanAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'sudanAppeal'
+              state.selectedFund === 'sudanAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -386,7 +124,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('syriaAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'syriaAppeal'
+              state.selectedFund === 'syriaAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -396,7 +134,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('yemenAppeal')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'yemenAppeal'
+              state.selectedFund === 'yemenAppeal'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -406,7 +144,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('waterForLife')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'waterForLife'
+              state.selectedFund === 'waterForLife'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -416,7 +154,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('orphansAndChildren')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'orphansAndChildren'
+              state.selectedFund === 'orphansAndChildren'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -426,7 +164,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('sadaqahJariya')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'sadaqahJariya'
+              state.selectedFund === 'sadaqahJariya'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -436,7 +174,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('peopleInDebt')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'peopleInDebt'
+              state.selectedFund === 'peopleInDebt'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -446,7 +184,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('waqf')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'waqf'
+              state.selectedFund === 'waqf'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -456,7 +194,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('interest')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'interest'
+              state.selectedFund === 'interest'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -466,7 +204,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('humanitarians')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'humanitarians'
+              state.selectedFund === 'humanitarians'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -476,7 +214,7 @@ const FundSelection = () => {
           <button
             onClick={() => handleFundSelection('globalEmergencies')}
             className={`md:hidden block py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              selectedFund === 'globalEmergencies'
+              state.selectedFund === 'globalEmergencies'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -487,7 +225,7 @@ const FundSelection = () => {
         <button
           onClick={() => handleFundSelection('globalEmergencies')}
           className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white mt-4 w-[50%] mx-auto md:block hidden ${
-            selectedFund === 'globalEmergencies'
+            state.selectedFund === 'globalEmergencies'
               ? 'bg-[#01aef0] text-white'
               : 'bg-white text-[#555555]'
           }`}
@@ -495,23 +233,23 @@ const FundSelection = () => {
           Global Emergencies
         </button>
         <div ref={componentRef}>
-          {selectedFund === 'emergencyAppeal' && <EmergencyAppeal />}
-          {selectedFund === 'zakat' && <Zakat />}
-          {selectedFund === 'sadaqah' && <Sadaqah />}
-          {selectedFund === 'neededMost' && <NeededMost />}
-          {selectedFund === 'fidyah' && <Fidyah />}
-          {selectedFund === 'kafarrah' && <Kaffarah />}
-          {selectedFund === 'sudanAppeal' && <SudanAppeal />}
-          {selectedFund === 'syriaAppeal' && <SyriaAppeal />}
-          {selectedFund === 'yemenAppeal' && <YemenAppeal />}
-          {selectedFund === 'waterForLife' && <WaterForLife />}
-          {selectedFund === 'orphansAndChildren' && <OrphansAndChildren />}
-          {selectedFund === 'sadaqahJariya' && <SadaqahJariya />}
-          {selectedFund === 'peopleInDebt' && <PeopleInDebt />}
-          {selectedFund === 'waqf' && <Waqf />}
-          {selectedFund === 'interest' && <Interest />}
-          {selectedFund === 'humanitarians' && <Humanitarians />}
-          {selectedFund === 'globalEmergencies' && <GlobalEmergencies />}
+          {state.selectedFund === 'emergencyAppeal' && <EmergencyAppeal />}
+          {state.selectedFund === 'zakat' && <Zakat />}
+          {state.selectedFund === 'sadaqah' && <Sadaqah />}
+          {state.selectedFund === 'neededMost' && <NeededMost />}
+          {state.selectedFund === 'fidyah' && <Fidyah />}
+          {state.selectedFund === 'kafarrah' && <Kaffarah />}
+          {state.selectedFund === 'sudanAppeal' && <SudanAppeal />}
+          {state.selectedFund === 'syriaAppeal' && <SyriaAppeal />}
+          {state.selectedFund === 'yemenAppeal' && <YemenAppeal />}
+          {state.selectedFund === 'waterForLife' && <WaterForLife />}
+          {state.selectedFund === 'orphansAndChildren' && <OrphansAndChildren />}
+          {state.selectedFund === 'sadaqahJariya' && <SadaqahJariya />}
+          {state.selectedFund === 'peopleInDebt' && <PeopleInDebt />}
+          {state.selectedFund === 'waqf' && <Waqf />}
+          {state.selectedFund === 'interest' && <Interest />}
+          {state.selectedFund === 'humanitarians' && <Humanitarians />}
+          {state.selectedFund === 'globalEmergencies' && <GlobalEmergencies />}
         </div>
         <div className="flex items-center justify-between mt-8">
           <Link href={'/donate'}>
