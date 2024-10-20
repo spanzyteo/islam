@@ -86,12 +86,10 @@ const ProofOfPayment = () => {
         setFormData({
           imageLink: '',
         })
-        console.log('picture added')
         setTimeout(() => {
           setLoading(false)
-          alert('File successfully submitted!')
-          setSelectedFile(null) // Clear the file input after submission
-        }, 2000) // Simulates a 2-second submission delay
+          setSelectedFile(null) 
+        }, 2000)
         router.push('/donate/thank-you')
       } else {
         console.error('Error posting image')

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useFund } from '@/app/(main)/utils/Context'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Payment = () => {
   const { state, dispatch } = useFund()
@@ -68,43 +69,91 @@ const Payment = () => {
             >
               <Link href={'/donate/monthly/details/payment/bank-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out ">
-                  Bank Details
+                  Pay With Bank Details
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/zelle-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Zelle Details
+                  Pay With Zelle Details
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/venmo-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4  cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Venmo Details
+                  Pay With Venmo Details
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/paypal-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Paypal Details
+                  Pay With Paypal Details
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/cashapp-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Cashapp Details
+                  Pay With Cashapp Details
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/bitcoin-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Bitcoin Details
+                  Pay With Bitcoin Details
                 </h1>
                 <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               </Link>
             </motion.div>
           )}
         </AnimatePresence>
+        <div className="flex flex-row items-center justify-center gap-3 mt-20">
+          <div className="h-[50px] w-[50px]">
+            <Image
+              src={'/bitcoin-logo.png'}
+              alt="img"
+              height={40}
+              width={40}
+              className="h-[100%] w-[100%]"
+            />
+          </div>
+          <div className="h-[50px] w-[50px]">
+            <Image
+              src={'/cashapp-logo.webp'}
+              alt="img"
+              height={40}
+              width={40}
+              className="h-[100%] w-[100%]"
+            />
+          </div>
+          <div className="h-[50px] w-[50px]">
+            <Image
+              src={'/paypal-logo.png'}
+              alt="img"
+              height={40}
+              width={40}
+              className="h-[100%] w-[100%]"
+              objectFit=""
+            />
+          </div>
+          <div className="h-[50px] w-[50px]">
+            <Image
+              src={'/venmo-logo.png'}
+              alt="img"
+              height={40}
+              width={40}
+              className="h-[100%] w-[100%]"
+            />
+          </div>
+          <div className="h-[50px] w-[50px]">
+            <Image
+              src={'/zelle-logo.webp'}
+              alt="img"
+              height={40}
+              width={40}
+              className="h-[100%] w-[100%]"
+            />
+          </div>
+        </div>
       </div>
     </div>
   )
