@@ -66,39 +66,39 @@ const Payment = () => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Link href={'/donate/monthly/details/payment/bank-payment'}>
+              <Link href={'/donate/one-off/details/payment/bank-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out ">
-                  Bank Details
+                  Bank Transfer
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
-              <Link href={'/donate/monthly/details/payment/zelle-payment'}>
+              <Link href={'/donate/one-off/details/payment/zelle-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Zelle Details
+                  Zelle
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
-              <Link href={'/donate/monthly/details/payment/venmo-payment'}>
+              <Link href={'/donate/one-off/details/payment/venmo-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4  cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Venmo Details
+                  Venmo
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
-              <Link href={'/donate/monthly/details/payment/paypal-payment'}>
+              <Link href={'/donate/one-off/details/payment/paypal-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Paypal Details
+                  Paypal
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
-              <Link href={'/donate/monthly/details/payment/cashapp-payment'}>
+              <Link href={'/donate/one-off/details/payment/cashapp-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Cashapp Details
+                  Cashapp 
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
-              <Link href={'/donate/monthly/details/payment/bitcoin-payment'}>
+              <Link href={'/donate/one-off/details/payment/bitcoin-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Bitcoin Details
+                  Bitcoin
                 </h1>
                 <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               </Link>

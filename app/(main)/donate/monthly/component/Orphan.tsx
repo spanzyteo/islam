@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { orphan } from '@/app/(main)/data/donateData'
+import { useFund } from '@/app/(main)/utils/Context'
 
 const Orphan = () => {
+  const { state, dispatch } = useFund()
   const [selectedSection, setSelectedSection] = useState('USD')
   const [donateAmount, setDonateAmount] = useState<number | null>(100)
   const [isOther, setIsOther] = useState(false)
@@ -14,6 +16,18 @@ const Orphan = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setOtherAmount(value === '' ? null : Number(value))
+    dispatch({
+      type: 'SET_DONATE_AMOUNT',
+      payload: value === '' ? null : Number(value),
+    })
+  }
+
+  const handleAmountClick = (amount: number) => {
+    setIsOther(false)
+    dispatch({
+      type: 'SET_DONATE_AMOUNT', // Dispatch the predefined amount to the global state
+      payload: amount,
+    })
   }
 
   return (
@@ -56,11 +70,10 @@ const Orphan = () => {
             >
               <button
                 onClick={() => {
-                  setDonateAmount(150)
-                  setIsOther(false)
+                  handleAmountClick(150)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 150
+                  state.donateAmount === 150
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -69,11 +82,10 @@ const Orphan = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(100)
-                  setIsOther(false)
+                  handleAmountClick(100)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 100
+                  state.donateAmount === 100
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -82,11 +94,10 @@ const Orphan = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(50)
-                  setIsOther(false)
+                  handleAmountClick(50)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 50
+                  state.donateAmount === 50
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -96,7 +107,10 @@ const Orphan = () => {
               <button
                 onClick={() => {
                   setIsOther(true)
-                  setDonateAmount(null)
+                  dispatch({
+                    type: 'SET_DONATE_AMOUNT',
+                    payload: null, 
+                  })
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
                   isOther
@@ -119,7 +133,7 @@ const Orphan = () => {
               </div>
             )}
             <div className="text-lg text-[#555555]">
-              Making a donation of {donateAmount || otherAmount} will help save
+              Making a donation of {state.donateAmount || otherAmount} will help save
               lives
             </div>
           </>

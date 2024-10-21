@@ -80,7 +80,6 @@ const DetailsForm = () => {
           town: '',
           country: '',
         })
-        console.log('form added')
         router.push('/donate/one-off/details/payment')
       } else {
         console.error('Error posting data')

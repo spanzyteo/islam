@@ -25,13 +25,13 @@ const Payment = () => {
           Payment
         </h1>
         <h1 className="mx-auto mt-4 text-gray-600 text-lg">
-          Total Donation: xxxx
+          Total Donation: {state.donateAmount}
         </h1>
         <div className="flex flex-col justify-center mt-6">
           <div className="w-[100%] h-[3px] bg-[#d7d7d7]"></div>
           <div className="flex justify-between mt-4">
             <div className="text-gray-600 text-lg">{state.selectedFund}</div>
-            <div className="text-gray-600 text-lg">$100</div>
+            <div className="text-gray-600 text-lg">{state.donateAmount}</div>
           </div>
           <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
         </div>
@@ -69,37 +69,37 @@ const Payment = () => {
             >
               <Link href={'/donate/monthly/details/payment/bank-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out ">
-                  Pay With Bank Details
+                  Bank Transfer
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/zelle-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Pay With Zelle Details
+                  Zelle 
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/venmo-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4  cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Pay With Venmo Details
+                  Venmo 
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/paypal-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Pay With Paypal Details
+                  Paypal 
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/cashapp-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Pay With Cashapp Details
+                  Cashapp
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/bitcoin-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Pay With Bitcoin Details
+                  Bitcoin 
                 </h1>
                 <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               </Link>

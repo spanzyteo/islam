@@ -103,8 +103,8 @@ const ProofOfPayment = () => {
   return (
     <div className="mt-40 flex justify-center mx-auto">
       <div className="bg-gray-200 w-[95%] sm:w-[95%] lg:w-[60%] flex flex-col md:px-10 px-5 rounded-md pb-10">
-        <h1 className="text-[#01aef0] uppercase text-4xl font-bold mt-16 text-center">
-          Your Proof Of Payment
+        <h1 className="text-red-500 uppercase text-2xl font-bold mt-16 text-center">
+          Kindly provide us with proof of payment
         </h1>
         <form className="mt-8" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
@@ -129,7 +129,7 @@ const ProofOfPayment = () => {
               <span>{`Uploading ${filePerc}%`}</span>
             ) : filePerc === 100 ? (
               <span className="text-green-500 text-md">
-                Image successfully uploaded
+                Image uploaded, click to submit
               </span>
             ) : (
               ''
@@ -146,7 +146,7 @@ const ProofOfPayment = () => {
                 <span className="ml-2 font-semibold">Submitting...</span>
               </div>
             ) : (
-              <div className="text-lg font-semibold">Submit Proof</div>
+              <div className="text-lg font-semibold">Submit</div>
             )}
           </button>
         </form>

@@ -3,12 +3,22 @@ import React, { createContext, useReducer, useContext, ReactNode } from 'react'
 
 interface FundState {
   selectedFund: string
+  donateAmount: number
+  emergencyAmount: number
+  fidyaAmount: number
 }
 
-type FundAction = { type: 'SELECT_FUND'; payload: string }
+type FundAction =
+  | { type: 'SELECT_FUND'; payload: string }
+  | { type: 'SET_DONATE_AMOUNT'; payload: any }
+  | { type: 'SET_EMERGENCY_AMOUNT'; payload: any}
+  | { type: 'SET_FIDYA_AMOUNT'; payload: any}
 
 const initialState: FundState = {
   selectedFund: '',
+  donateAmount: 100,
+  emergencyAmount: 180,
+  fidyaAmount: 10
 }
 
 const fundReducer = (state: FundState, action: FundAction): FundState => {
@@ -18,14 +28,29 @@ const fundReducer = (state: FundState, action: FundAction): FundState => {
         ...state,
         selectedFund: action.payload,
       }
+    case 'SET_DONATE_AMOUNT':
+      return {
+        ...state,
+        donateAmount: action.payload,
+      } 
+    case 'SET_EMERGENCY_AMOUNT':
+      return {
+        ...state,
+        emergencyAmount: action.payload,
+      }
+    case 'SET_FIDYA_AMOUNT':
+      return {
+        ...state,
+        fidyaAmount: action.payload,
+      }
     default:
-      throw new Error(`Unhandled action type: ${action.type}`)
+      return state
   }
 }
 
 interface FundContextType {
-  state: FundState;
-  dispatch: React.Dispatch<FundAction>;
+  state: FundState
+  dispatch: React.Dispatch<FundAction>
 }
 
 const FundContext = createContext<FundContextType | undefined>(undefined)

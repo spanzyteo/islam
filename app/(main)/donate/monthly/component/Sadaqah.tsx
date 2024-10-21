@@ -1,8 +1,10 @@
 'use client'
 import { useState } from 'react'
 import { sadaqah } from '@/app/(main)/data/donateData'
+import { useFund } from '@/app/(main)/utils/Context'
 
 const Sadaqah = () => {
+  const { state, dispatch } = useFund()
   const [selectedSection, setSelectedSection] = useState('USD')
   const [donateAmount, setDonateAmount] = useState<number | null>(100)
   const [isOther, setIsOther] = useState(false)
@@ -15,8 +17,19 @@ const Sadaqah = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setOtherAmount(value === '' ? null : Number(value))
+    dispatch({
+      type: 'SET_DONATE_AMOUNT',
+      payload: value === '' ? null : Number(value),
+    })
   }
 
+  const handleAmountClick = (amount: number) => {
+    setIsOther(false)
+    dispatch({
+      type: 'SET_DONATE_AMOUNT', // Dispatch the predefined amount to the global state
+      payload: amount,
+    })
+  }
   return (
     <>
       <h1 className="text-[#01aef0] uppercase text-2xl font-bold mt-8">
@@ -57,11 +70,10 @@ const Sadaqah = () => {
             >
               <button
                 onClick={() => {
-                  setDonateAmount(150)
-                  setIsOther(false)
+                  handleAmountClick(150)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 150
+                  state.donateAmount === 150
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -70,11 +82,10 @@ const Sadaqah = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(100)
-                  setIsOther(false)
+                  handleAmountClick(100)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 100
+                  state.donateAmount === 100
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -83,11 +94,10 @@ const Sadaqah = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(50)
-                  setIsOther(false)
+                  handleAmountClick(50)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 50
+                  state.donateAmount === 50
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -97,7 +107,10 @@ const Sadaqah = () => {
               <button
                 onClick={() => {
                   setIsOther(true)
-                  setDonateAmount(null)
+                  dispatch({
+                    type: 'SET_DONATE_AMOUNT',
+                    payload: null, // Reset donateAmount in the global state when selecting "Other"
+                  })
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
                   isOther
@@ -120,7 +133,7 @@ const Sadaqah = () => {
               </div>
             )}
             <div className="text-lg text-[#555555]">
-              Making a donation of {donateAmount || otherAmount} will help save
+              Making a donation of {state.donateAmount || otherAmount} will help save
               lives
             </div>
           </>
