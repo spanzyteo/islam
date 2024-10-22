@@ -27,9 +27,9 @@ const FundSelection = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <button
-            onClick={() => handleFundSelection('Orphan')}
+            onClick={() => handleFundSelection('Orphans')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              state.selectedFund === 'Orphan'
+              state.selectedFund === 'Orphans'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -47,9 +47,9 @@ const FundSelection = () => {
             Sadaqah
           </button>
           <button
-            onClick={() => handleFundSelection('WaterForLife')}
+            onClick={() => handleFundSelection('Water For Life')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              state.selectedFund === 'WaterForLife'
+              state.selectedFund === 'Water For Life'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -57,9 +57,9 @@ const FundSelection = () => {
             Water For Life
           </button>
           <button
-            onClick={() => handleFundSelection('GlobalEmergencies')}
+            onClick={() => handleFundSelection('Global Emergencies')}
             className={`py-3 font-semibold hover:bg-[#01aef0] hover:text-white ${
-              state.selectedFund === 'GlobalEmergencies'
+              state.selectedFund === 'Global Emergencies'
                 ? 'bg-[#01aef0] text-white'
                 : 'bg-white text-[#555555]'
             }`}
@@ -68,9 +68,9 @@ const FundSelection = () => {
           </button>
         </div>
         {state.selectedFund === 'Sadaqah' && <Sadaqah />}
-        {state.selectedFund === 'WaterForLife' && <WaterForLife />}
-        {state.selectedFund === 'Orphan' && <Orphan />}
-        {state.selectedFund === 'GlobalEmergencies' && <GlobalEmergencies />}
+        {state.selectedFund === 'Water For Life' && <WaterForLife />}
+        {state.selectedFund === 'Orphans' && <Orphan />}
+        {state.selectedFund === 'Global Emergencies' && <GlobalEmergencies />}
         <div className="flex items-center justify-between mt-8">
           <Link href={'/donate'}>
             <button className="text-2xl font-bold bg-white flex items-center p-2 px-4 gap-2 text-[#A7A7A7] hover:bg-gray-300 hover:text-[#555555] transition-all duration-300 ease-in-out">

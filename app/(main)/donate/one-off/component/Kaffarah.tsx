@@ -1,8 +1,10 @@
 'use client'
 import { useState } from 'react'
 import { kaffarah } from '@/app/(main)/data/OneOffData'
+import { useFund } from '@/app/(main)/utils/Context'
 
 const Kaffarah = () => {
+  const { state, dispatch } = useFund()
   const [selectedSection, setSelectedSection] = useState('USD')
   const [donateAmount, setDonateAmount] = useState<number | null>(600)
   const [isOther, setIsOther] = useState(false)
@@ -15,6 +17,18 @@ const Kaffarah = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setOtherAmount(value === '' ? null : Number(value))
+    dispatch({
+      type: 'SET_KAFFARAH_AMOUNT',
+      payload: value === '' ? null : Number(value),
+    })
+  }
+
+  const handleAmountClick = (amount: number) => {
+    setIsOther(false)
+    dispatch({
+      type: 'SET_KAFFARAH_AMOUNT', // Dispatch the predefined amount to the global state
+      payload: amount,
+    })
   }
 
   return (
@@ -57,11 +71,10 @@ const Kaffarah = () => {
             >
               <button
                 onClick={() => {
-                  setDonateAmount(900)
-                  setIsOther(false)
+                  handleAmountClick(900)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 900
+                  state.kaffarahAmount === 900
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -70,11 +83,10 @@ const Kaffarah = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(600)
-                  setIsOther(false)
+                  handleAmountClick(600)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 600
+                  state.kaffarahAmount === 600
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -83,11 +95,10 @@ const Kaffarah = () => {
               </button>
               <button
                 onClick={() => {
-                  setDonateAmount(300)
-                  setIsOther(false)
+                  handleAmountClick(300)
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
-                  donateAmount === 300
+                  state.kaffarahAmount === 300
                     ? 'bg-[#01aef0] text-white'
                     : 'bg-white text-[#555555]'
                 }`}
@@ -97,7 +108,10 @@ const Kaffarah = () => {
               <button
                 onClick={() => {
                   setIsOther(true)
-                  setDonateAmount(null)
+                  dispatch({
+                    type: 'SET_KAFFARAH_AMOUNT',
+                    payload: null,
+                  })
                 }}
                 className={`p-4 px-10 font-bold text-4xl hover:bg-[#01aef0] hover:text-white w-full md:w-auto ${
                   isOther
@@ -120,7 +134,7 @@ const Kaffarah = () => {
               </div>
             )}
             <div className="text-lg text-[#555555]">
-              Making a donation of {donateAmount || otherAmount} will help save
+              Making a donation of {state.kaffarahAmount || otherAmount} will help save
               lives
             </div>
           </>

@@ -17,6 +17,47 @@ const Payment = () => {
     setPaymentDetails((prev) => !prev)
   }
 
+   const getSelectedAmount = () => {
+     switch (state.selectedFund) {
+       case 'Emergency Appeal':
+         return state.emergencyAmount
+       case 'Zakat':
+         return state.humanitariansAmount
+       case 'Sadaqah':
+         return state.humanitariansAmount
+       case 'Wherever Needed Most':
+         return state.donateAmount
+       case 'Fidyah':
+         return state.fidyaAmount
+       case 'Kafarrah':
+         return state.kaffarahAmount
+       case 'Sudan Emergency Appeal':
+         return state.humanitariansAmount
+       case 'Syria Crises Appeal':
+         return state.humanitariansAmount
+       case 'Yemen Appeal':
+         return state.humanitariansAmount
+       case 'Water For Life':
+         return state.donateAmount
+       case 'Orphans And Children':
+         return state.humanitariansAmount
+       case 'Sadaqah Jariyah':
+         return state.humanitariansAmount
+       case 'People In Debt':
+         return state.humanitariansAmount
+       case 'Waqf':
+         return state.humanitariansAmount
+       case 'Interest[RIBA]':
+         return state.humanitariansAmount
+       case 'Capacity Building For Humanitarians':
+         return state.humanitariansAmount
+       case 'Global Emergencies':
+         return state.donateAmount
+       default:
+         return 0
+     }
+   }
+
   return (
     <div className="mt-40 flex justify-center mx-auto">
       <div className="bg-gray-200 w-[95%] sm:w-[95%] lg:w-[60%] flex flex-col px-10 rounded-md pb-10">
@@ -24,13 +65,15 @@ const Payment = () => {
           Payment
         </h1>
         <h1 className="mx-auto mt-4 text-gray-600 text-lg">
-          Total Donation: xxxx
+          Total Donation:${getSelectedAmount()}
         </h1>
         <div className="flex flex-col justify-center mt-6">
           <div className="w-[100%] h-[3px] bg-[#d7d7d7]"></div>
           <div className="flex justify-between mt-4">
             <div className="text-gray-600 text-lg">{state.selectedFund}</div>
-            <div className="text-gray-600 text-lg">$100</div>
+            <div className="text-gray-600 text-lg">
+              ${getSelectedAmount()}
+            </div>
           </div>
           <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
         </div>
@@ -92,7 +135,7 @@ const Payment = () => {
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/one-off/details/payment/cashapp-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Cashapp 
+                  Cashapp
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>

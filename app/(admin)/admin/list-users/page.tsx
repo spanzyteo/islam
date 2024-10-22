@@ -13,7 +13,6 @@ const UsersList = () => {
       console.log('Fetching users...')
       try {
         const response = await axios.get(`${BASE_URL}/api/users-details`)
-        console.log(response.data)
         if (response.data.success && response.data.data.length > 0) {
           setUsers(response.data.data)
           console.log(response.data.data)
@@ -31,6 +30,21 @@ const UsersList = () => {
 
     fetchUsers()
   }, [])
+
+  const deleteUser = async (id: string | number) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/delete-user-details/${id}`
+      )
+      if (response.data) {
+        setUsers((prev) => prev.filter((userDetail) => userDetail.id !== id))
+      } else {
+        setError('Failed to delete user detail')
+      }
+    } catch (error: any) {
+      setError(error.response?.data?.message || 'Failed to delete user detail')
+    }
+  }
   return (
     <div className="bg-[#F2F2F2] min-h-screen p-4">
       <div className="md:ml-[320px] ml-[1rem] flex flex-col">
@@ -68,6 +82,9 @@ const UsersList = () => {
                 <div className="table-cell p-2 md:p-4 border border-gray-300">
                   Country
                 </div>
+                <div className="table-cell p-2 md:p-4 border border-gray-300">
+                  Action
+                </div>
               </div>
               {/* Table Rows */}
               {users.length > 0 ? (
@@ -99,6 +116,9 @@ const UsersList = () => {
                     </div>
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       {user.country}
+                    </div>
+                    <div onClick={() => deleteUser(user.id)} className="table-cell p-2 md:p-4 border border-gray-300 cursor-pointer">
+                      Delete
                     </div>
                   </div>
                 ))
