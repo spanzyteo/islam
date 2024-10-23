@@ -114,7 +114,6 @@ const ProofOfPayment = () => {
             <input
               type="file"
               id="proofOfPayment"
-              accept="image/*"
               onChange={handleFileChange}
               className="p-2 border rounded-md"
             />
