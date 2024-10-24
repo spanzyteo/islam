@@ -27,7 +27,7 @@ const DetailsForm = () => {
     email: '',
     phone: '',
     address1: '',
-    address2: '',
+    address2: 'address2',
     town: '',
     country: '',
   })
@@ -205,16 +205,17 @@ const DetailsForm = () => {
               />
             </div>
             <div className="flex flex-col gap-2 mt-4">
-              <label htmlFor="address" className="text-[#495057] font-semibold">
+              <label htmlFor="address" className="text-[#495057] font-semibold hidden">
                 Address 2
               </label>
               <input
                 type="text"
                 name="address2"
                 placeholder="123 High Street"
-                className="md:h-[37px] w-[100%] px-2 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
+                className="md:h-[37px] w-[100%] px-2 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300 hidden"
                 value={formData.address2}
                 onChange={handleInputChange}
+                hidden
               />
             </div>
           </div>

@@ -20,8 +20,6 @@ const Navbar = () => {
         </div>
       </Link>
       <div className="flex items-center">
-        <FaCartShopping className="h-[20px] w-[20px]" />
-        <IoMdArrowDropdown className="h-[20px] w-[20px]" />
       </div>
     </div>
   )

@@ -65,14 +65,17 @@ const Payment = () => {
           Payment
         </h1>
         <h1 className="mx-auto mt-4 text-gray-600 text-lg">
-          Total Donation:${getSelectedAmount()}
+          Total Donation:{' '}
+          <span className="text-black">{state.selectedSection}</span>{' '}
+          {getSelectedAmount()}
         </h1>
         <div className="flex flex-col justify-center mt-6">
           <div className="w-[100%] h-[3px] bg-[#d7d7d7]"></div>
           <div className="flex justify-between mt-4">
             <div className="text-gray-600 text-lg">{state.selectedFund}</div>
             <div className="text-gray-600 text-lg">
-              ${getSelectedAmount()}
+              <span className="text-black">{state.selectedSection}</span>{' '}
+              {getSelectedAmount()}
             </div>
           </div>
           <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>

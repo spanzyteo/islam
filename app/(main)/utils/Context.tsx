@@ -8,6 +8,7 @@ interface FundState {
   fidyaAmount: number
   humanitariansAmount: number
   kaffarahAmount: number
+  selectedSection: string
 }
 
 type FundAction =
@@ -17,6 +18,7 @@ type FundAction =
   | { type: 'SET_FIDYA_AMOUNT'; payload: any}
   | { type: 'SET_HUMANITARIANS_AMOUNT'; payload: any}
   | { type: 'SET_KAFFARAH_AMOUNT'; payload: any}
+  | { type: 'SET_SELECTED_SECTION'; payload: string}
 
 const initialState: FundState = {
   selectedFund: '',
@@ -24,7 +26,8 @@ const initialState: FundState = {
   emergencyAmount: 180,
   fidyaAmount: 10,
   humanitariansAmount: 150,
-  kaffarahAmount: 600
+  kaffarahAmount: 600,
+  selectedSection: 'USD'
 }
 
 const fundReducer = (state: FundState, action: FundAction): FundState => {
@@ -38,7 +41,7 @@ const fundReducer = (state: FundState, action: FundAction): FundState => {
       return {
         ...state,
         donateAmount: action.payload,
-      } 
+      }
     case 'SET_EMERGENCY_AMOUNT':
       return {
         ...state,
@@ -54,10 +57,10 @@ const fundReducer = (state: FundState, action: FundAction): FundState => {
         ...state,
         humanitariansAmount: action.payload,
       }
-    case 'SET_KAFFARAH_AMOUNT':
+    case 'SET_SELECTED_SECTION':
       return {
         ...state,
-        kaffarahAmount: action.payload,
+        selectedSection: action.payload,
       }
     default:
       return state

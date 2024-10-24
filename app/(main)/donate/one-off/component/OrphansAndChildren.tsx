@@ -37,25 +37,31 @@ const OrphansAndChildren = () => {
       </h1>
       <div className="flex items-center gap-4 mt-4 justify-center text-2xl text-[#b6b6b6] font-semibold">
         <button
-          onClick={() => setSelectedSection('USD')}
+          onClick={() =>
+            dispatch({ type: 'SET_SELECTED_SECTION', payload: 'USD' })
+          }
           className={`${
-            selectedSection === 'USD' ? 'text-black' : 'text-[#b6b6b6]'
+            state.selectedSection === 'USD' ? 'text-black' : 'text-[#b6b6b6]'
           }`}
         >
           USD
         </button>
         <button
-          onClick={() => setSelectedSection('GBP')}
+          onClick={() =>
+            dispatch({ type: 'SET_SELECTED_SECTION', payload: 'GBP' })
+          }
           className={`${
-            selectedSection === 'GBP' ? 'text-black' : 'text-[#b6b6b6]'
+            state.selectedSection === 'GBP' ? 'text-black' : 'text-[#b6b6b6]'
           }`}
         >
           GBP
         </button>
         <button
-          onClick={() => setSelectedSection('EUR')}
+          onClick={() =>
+            dispatch({ type: 'SET_SELECTED_SECTION', payload: 'EUR' })
+          }
           className={`${
-            selectedSection === 'EUR' ? 'text-black' : 'text-[#b6b6b6]'
+            state.selectedSection === 'EUR' ? 'text-black' : 'text-[#b6b6b6]'
           }`}
         >
           EUR
@@ -133,8 +139,8 @@ const OrphansAndChildren = () => {
               </div>
             )}
             <div className="text-lg text-[#555555]">
-              Making a donation of {state.humanitariansAmount || otherAmount} will help save
-              lives
+              Making a donation of {state.humanitariansAmount || otherAmount}{' '}
+              will help save lives
             </div>
           </>
         ))}

@@ -25,13 +25,18 @@ const Payment = () => {
           Payment
         </h1>
         <h1 className="mx-auto mt-4 text-gray-600 text-lg">
-          Total Donation: {state.donateAmount}
+          Total Donation:{' '}
+          <span className="text-black">{state.selectedSection}</span>{' '}
+          {state.donateAmount}
         </h1>
         <div className="flex flex-col justify-center mt-6">
           <div className="w-[100%] h-[3px] bg-[#d7d7d7]"></div>
           <div className="flex justify-between mt-4">
             <div className="text-gray-600 text-lg">{state.selectedFund}</div>
-            <div className="text-gray-600 text-lg">{state.donateAmount}</div>
+            <div className="text-gray-600 text-lg">
+              <span className="text-black">{state.selectedSection}</span>{' '}
+              {state.donateAmount}
+            </div>
           </div>
           <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
         </div>
@@ -75,19 +80,19 @@ const Payment = () => {
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/zelle-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Zelle 
+                  Zelle
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/venmo-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4  cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Venmo 
+                  Venmo
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/paypal-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Paypal 
+                  Paypal
                 </h1>
               </Link>
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
@@ -99,7 +104,7 @@ const Payment = () => {
               <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               <Link href={'/donate/monthly/details/payment/bitcoin-payment'}>
                 <h1 className="text-gray-600 text-lg ml-4 mt-4 cursor-pointer hover:text-[#01aef0] transition-all duration-300 ease-in-out">
-                  Bitcoin 
+                  Bitcoin
                 </h1>
                 <div className="w-[100%] h-[3px] bg-[#d7d7d7] mt-4"></div>
               </Link>
