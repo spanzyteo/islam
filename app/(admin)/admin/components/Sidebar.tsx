@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Sidebar = () => {
-  const pathname = usePathname() 
+  const pathname = usePathname()
   const [activeLink, setActiveLink] = useState('')
 
   useEffect(() => {
@@ -26,11 +26,21 @@ const Sidebar = () => {
         case '/admin/view-payment-proof':
           setActiveLink('view_payment_proof')
           break
+        case '/admin/login':
+          setActiveLink('log_out')
+          break
         default:
           setActiveLink('Dashboard')
       }
     }
   }, [pathname])
+
+  const router = useRouter()
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn') // Clear the session flag
+    router.push('/admin/login') // Redirect to the login page
+  }
 
   const handleLinkClick = (linkName: string) => {
     setActiveLink(linkName)
@@ -103,6 +113,18 @@ const Sidebar = () => {
             }`}
           >
             View payment proof
+          </h1>
+        </Link>
+        <Link href={'/admin/login'} passHref>
+          <h1
+            onClick={handleLogout}
+            className={`text-xl font-semibold cursor-pointer ${
+              activeLink === 'view_payment_proof'
+                ? 'text-[#01aef0]'
+                : 'text-gray-500'
+            }`}
+          >
+            Logout
           </h1>
         </Link>
       </div>

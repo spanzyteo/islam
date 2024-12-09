@@ -1,12 +1,20 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn')
+    if (isLoggedIn) {
+      router.push('/admin')
+    }
+  }, [router])
 
   const handleLogin = () => {
     // Fake login validation
@@ -14,7 +22,7 @@ const Login = () => {
       localStorage.setItem('auth', 'true')
       router.push('/admin')
     } else {
-      alert('Invalid credentials')
+      setError(true)
     }
   }
 
@@ -39,9 +47,13 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {error && (
+          <p className='text-red-600 mt-2'>Wrong username or password</p>
+        )}
       </div>
-      <button onClick={handleLogin}
-        className="bg-blue-500 text-white px-4 py-2 mt-8 rounded-sm hover:opacity-85" 
+      <button
+        onClick={handleLogin}
+        className="bg-blue-500 text-white px-4 py-2 mt-8 rounded-sm hover:opacity-85"
       >
         Login
       </button>

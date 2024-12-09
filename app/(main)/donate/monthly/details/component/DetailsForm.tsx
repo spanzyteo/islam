@@ -10,6 +10,8 @@ import countryList from 'react-select-country-list'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import { BASE_URL } from '@/app/(admin)/admin/utils/apiConfig'
 
 type CountryOption = {
@@ -54,6 +56,13 @@ const DetailsForm = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handlePhoneChange = (value: string) => {
+    setFormData({
+      ...formData,
+      phone: value, // Update phone with the full value, including the country code
     })
   }
 
@@ -178,13 +187,11 @@ const DetailsForm = () => {
               >
                 Contact Number
               </label>
-              <input
-                type="number"
-                name="phone"
+              <PhoneInput
                 placeholder="Number"
-                className="md:h-[37px] md:w-[342px] px-2 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
+                inputClass="md:h-[37px] md:w-[342px] px-2 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] transition duration-300"
                 value={formData.phone}
-                onChange={handleInputChange}
+                onChange={handlePhoneChange}
               />
             </div>
           </div>
