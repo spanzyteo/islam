@@ -119,9 +119,7 @@ const Sidebar = () => {
           <h1
             onClick={handleLogout}
             className={`text-xl font-semibold cursor-pointer ${
-              activeLink === 'view_payment_proof'
-                ? 'text-[#01aef0]'
-                : 'text-gray-500'
+              activeLink === 'log_out' ? 'text-[#01aef0]' : 'text-gray-500'
             }`}
           >
             Logout

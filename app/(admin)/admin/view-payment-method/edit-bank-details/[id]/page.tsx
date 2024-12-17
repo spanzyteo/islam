@@ -172,7 +172,7 @@ const EditBankDetails = () => {
                     htmlFor="bank_address"
                     className="text-[#495057] font-semibold"
                   >
-                    Bank Address
+                    Account Number
                     <span className="text-[#01aef0] font-semibold">*</span>
                   </label>
                   <input

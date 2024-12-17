@@ -14,6 +14,7 @@ const ViewPayment = () => {
   const [bitcoinDetails, setBitcoinDetails] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [deleteError, setDeleteError] = useState('')
 
   const handleBankEdit = (id: string) => {
     router.push(`/admin/view-payment-method/edit-bank-details/${id}`)
@@ -152,12 +153,11 @@ const ViewPayment = () => {
         setBankDetails((prevDetails) =>
           prevDetails.filter((bankDetail) => bankDetail.id !== id)
         )
-        console.log('Bank detail deleted successfully')
       } else {
-        setError('Failed to delete bank detail')
+        setDeleteError('Failed to delete bank detail')
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to delete bank detail')
+      setDeleteError(error.response?.data?.message || 'Failed to delete bank detail')
     }
   }
 
@@ -170,12 +170,11 @@ const ViewPayment = () => {
         setZelleDetails((prevDetails) =>
           prevDetails.filter((zelleDetail) => zelleDetail.id !== id)
         )
-        console.log('Zelle detail deleted successfully')
       } else {
-        setError('Failed to delete zelle detail')
+        setDeleteError('Failed to delete zelle detail')
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to delete zelle detail')
+      setDeleteError(error.response?.data?.message || 'Failed to delete zelle detail')
     }
   }
 
@@ -189,10 +188,10 @@ const ViewPayment = () => {
           prevDetails.filter((venmoDetail) => venmoDetail.id !== id)
         )
       } else {
-        setError('Failed to delete venmo detail')
+        setDeleteError('Failed to delete Venmo Detail')
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to delete venmo detail')
+      setDeleteError(error.response?.data?.message || 'Failed to delete venmo detail')
     }
   }
 
@@ -207,10 +206,10 @@ const ViewPayment = () => {
           prevDetails.filter((paypalDetail) => paypalDetail.id !== id)
         )
       } else {
-        setError('Failed to delete paypal detail')
+        setDeleteError('Failed to delete paypal details')
       }
     } catch (error: any) {
-      setError(
+      setDeleteError(
         error.response?.data?.message || 'Failed to delete paypal detail'
       )
     }
@@ -227,10 +226,10 @@ const ViewPayment = () => {
           prevDetails.filter((cashappDetail) => cashappDetail.id !== id)
         )
       } else {
-        setError('Failed to delete cashapp detail')
+        setDeleteError('Failed to delete cashapp detail')
       }
     } catch (error: any) {
-      setError(
+      setDeleteError(
         error.response?.data?.message || 'Failed to delete cashapp detail'
       )
     }
@@ -246,23 +245,22 @@ const ViewPayment = () => {
           prevDetails.filter((bitcoinDetail) => bitcoinDetail.id !== id)
         )
       } else {
-        setError('Failed to delete bitcoin detail')
+        setDeleteError('Failed to delete bitcoin detail')
       }
     } catch (error: any) {
-      setError(
+      setDeleteError(
         error.response?.data?.message || 'Failed to delete bitcoin detail'
       )
     }
   }
 
   if (loading) {
-    return <p>Loading...</p>
+    return (
+      <div className="flex items-center justify-center h-[100px] w-[300px] m-auto border mt-32 border-gray-500">
+        <h1 className="text-green-700">Loading...</h1>
+      </div>
+    )
   }
-
-  if (error) {
-    return <p>Error: {error}</p>
-  }
-
   return (
     <div className="bg-[#F2F2F2]">
       <div className="md:ml-[400px] ml-[3rem] flex flex-col">
@@ -294,7 +292,7 @@ const ViewPayment = () => {
                       IBAN
                     </div>
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
-                      Bank Address
+                      Account Name
                     </div>
                     <div className="table-cell p-2 md:p-4 border border-gray-300">
                       Receiver's Address

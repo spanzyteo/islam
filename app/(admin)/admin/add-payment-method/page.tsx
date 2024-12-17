@@ -323,7 +323,7 @@ const AddPayment = () => {
                     <span className="text-[#01aef0] font-semibold">*</span>
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     name="swiftcode"
                     value={formData.swiftcode}
                     onChange={handleInputChange}
@@ -355,7 +355,7 @@ const AddPayment = () => {
                     htmlFor="bank_address"
                     className="text-[#495057] font-semibold"
                   >
-                    Bank Address
+                    Account Name
                     <span className="text-[#01aef0] font-semibold">*</span>
                   </label>
                   <input
@@ -363,7 +363,7 @@ const AddPayment = () => {
                     name="bankaddress"
                     value={formData.bankaddress}
                     onChange={handleInputChange}
-                    placeholder="Bank Address"
+                    placeholder="Account Name"
                     className="md:h-[37px] md:w-[350px] w-[90%] px-1 py-2 text-[#495057] focus:outline-none focus:border-2 focus:border-[#01aef0] border-2 border-gray-500 transition duration-300"
                     required
                   />

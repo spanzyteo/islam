@@ -150,7 +150,7 @@ const PaymentDetails = () => {
               IBAN: <span className="font-normal">{bankDetails[0].iban}</span>
             </h1>
             <h1 className="text-[#495057] font-semibold text-xl">
-              Bank Address:{' '}
+              Account Name:{' '}
               <span className="font-normal">{bankDetails[0].bankaddress}</span>
             </h1>
             <h1 className="text-[#495057] font-semibold text-xl">
